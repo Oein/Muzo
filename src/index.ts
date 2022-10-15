@@ -22,6 +22,9 @@ import fsExtra from "fs-extra";
 import { stringify as ya_stringify, parse as ya_parse } from "yaml";
 import express from "express";
 
+// router imports
+import api_files from "./routes/api/files/list";
+
 const app = express();
 
 (async function () {
@@ -41,6 +44,8 @@ const app = express();
 
   logger.info(`Reading muzo configuration... (${configFile})`);
   writeFileSync(configFile, ya_stringify(global.config));
+
+  app.use("/api/files", api_files); // dir command api
 
   app.listen(global.config.port, () => {
     logger.success(
