@@ -34,7 +34,15 @@ router.get("/*", (req, res) => {
         return;
       }
       res.send(
-        replaceAll(v.toString(), "{serverName}", global.config.serverName)
+        replaceAll(
+          replaceAll(
+            replaceAll(v.toString(), "{serverName}", global.config.serverName),
+            "\n",
+            ""
+          ),
+          "    ",
+          ""
+        )
       );
     });
   } else if (fileN.endsWith(".css")) {
