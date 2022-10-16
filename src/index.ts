@@ -24,14 +24,14 @@ import express from "express";
 import { join as p_join } from "path";
 
 // router imports
-import route_api_files from "./routes/api/files/list";
+import route_api from "./routes/api/apiroute";
 import route_root from "./routes/index";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 // init database
-import db from "./utils/database.js";
+import { init as initDB } from "./utils/database";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -110,10 +110,11 @@ async function ensureConfig() {
 
   await ensureSalt();
   await ensureConfig();
+  initDB();
 
-  app.use("/api/files", route_api_files); // dir command api
-  app.use("/static", express.static(p_join(__dirname, "/static")));
+  app.use("/api", route_api);
   app.use("/", route_root);
+  app.use("/static", express.static(p_join(__dirname, "/static")));
 
   app.listen(global.config.port, () => {
     logger.success(
