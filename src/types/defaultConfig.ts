@@ -16,5 +16,6 @@ const defaultConfig: Config = {
       ],
     },
   ],
+  salt: btoa((Math.random() * 10000000000 * new Date().getTime()).toString()),
 };
 export default defaultConfig;
