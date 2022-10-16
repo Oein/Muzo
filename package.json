@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch \"src/**\" --ext \"ts,json,mts,cts\" --ignore \"src/**/*.spec.ts\" --exec \"tsc;node --experimental-modules --es-module-specifier-resolution=node dist/index.js\""
+    "dev": "nodemon --watch \"src/**\" --ext \"ts,json,mts,cts,html,css\" --ignore \"src/**/*.spec.ts\" --exec \"tsc;cp -r src/static dist;cp -r src/public dist;node --experimental-modules --es-module-specifier-resolution=node dist/index.js\""
   },
   "keywords": [],
   "author": "",
