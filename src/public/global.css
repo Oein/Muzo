@@ -71,17 +71,15 @@ button {
   background-color: inherit;
   outline: none;
   border-radius: 0px;
-  color: black;
+  background: #111;
+  color: white;
   margin-bottom: 10px;
   font-size: 1rem;
   border: #111 3px solid;
   padding: 0.5rem 2rem;
   transition: all 0.3s;
-  font-weight: 200;
 }
 
 button:hover {
-  box-shadow: 3px 3px 5px 0px #111;
-  background: #111;
-  color: white;
+  box-shadow: 0.5rem 0.5rem 1.5rem 0px #bbb;
 }
