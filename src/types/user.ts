@@ -5,4 +5,5 @@ export interface User {
   name: string;
   allowedPaths: allowedPath[];
   permission: permission;
+  authed: string;
 }
