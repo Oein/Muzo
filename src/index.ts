@@ -14,7 +14,7 @@
  */
 
 import logger from "./logger/index.mjs";
-import { configDir, configFile, saltFile } from "./utils/appPaths";
+import { configDir, configFile, saltFile, dataDir } from "./utils/appPaths";
 import defaultConfig from "./types/defaultConfig.js";
 
 import { readFileSync, existsSync, writeFileSync } from "fs";
@@ -29,6 +29,9 @@ import route_root from "./routes/index";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+
+// init database
+import db from "./utils/database.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -102,6 +105,7 @@ async function ensureConfig() {
   logger.info("Starting muzo...");
 
   fsExtra.ensureDirSync(configDir);
+  fsExtra.ensureDirSync(dataDir);
   fsExtra.ensureDirSync(p_join(configDir, "invites"));
 
   await ensureSalt();
