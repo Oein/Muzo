@@ -9,3 +9,6 @@ yarn.lock
 
 # npm
 package-lock.json
+
+# Mac
+**/.DS_Store
