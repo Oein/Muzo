@@ -1,8 +1,15 @@
 import { QuickDB } from "quick.db";
+import logger from "../logger/index.mjs";
 import { dbFile } from "./appPaths";
 
-const db = new QuickDB({
-  filePath: dbFile,
-});
+let db: QuickDB;
 
-export default db;
+export function init() {
+  logger.info(`Reading database... (${dbFile})`);
+
+  db = new QuickDB({
+    filePath: dbFile,
+  });
+}
+
+export default db!;
