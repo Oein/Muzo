@@ -7,6 +7,7 @@ router.use((req, res, next) => {
 });
 
 router.get("/*", (req, res) => {
+  console.log(req.headers.authorization);
   res.send("/" + req.params[0]);
 });
 
