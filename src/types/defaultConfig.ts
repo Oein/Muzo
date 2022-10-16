@@ -1,3 +1,4 @@
+import { idToAuthKey } from "../utils/authKey";
 import { Config } from "./config";
 import { permission } from "./permission";
 
@@ -14,8 +15,8 @@ const defaultConfig: Config = {
           permissions: [permission.Read, permission.Write, permission.Delete],
         },
       ],
+      authed: idToAuthKey("admin", global.salt),
     },
   ],
-  salt: btoa((Math.random() * 10000000000 * new Date().getTime()).toString()),
 };
 export default defaultConfig;

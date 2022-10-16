@@ -4,6 +4,7 @@ import defaultConfig from "./defaultConfig";
 
 declare global {
   var config: Config;
+  var salt: string;
 }
 
 globalThis.config = defaultConfig;

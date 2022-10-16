@@ -4,5 +4,4 @@ export interface Config {
   serverName: string;
   users: User[];
   port: number;
-  salt: string;
 }
