@@ -1,0 +1,68 @@
+header {
+  text-align: center;
+}
+
+.onright {
+  text-align: end;
+  right: 0px;
+  position: absolute;
+}
+
+.wfit {
+  width: fit-content;
+}
+
+.acenter {
+  position: relative;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.drel {
+  position: relative;
+}
+
+.nobmargin {
+  margin-bottom: 0px;
+}
+
+.notmargin {
+  margin-top: 0px;
+}
+
+.dinline {
+  display: table-cell;
+}
+
+.servername {
+  font-size: 3rem;
+}
+
+.wmin {
+  width: min-content;
+}
+
+.signinarticle {
+  border: #999 1px solid;
+  width: min-content;
+  padding: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.sintext {
+  position: absolute;
+  left: 50%;
+  font-size: 1.5rem;
+  transform: translate(-50%, calc(-1.5rem - 10px * 2 - 2rem));
+  background-color: white;
+  padding: 10px;
+}
+
+#passwordInput,
+.signinarticle,
+#signinbtn {
+  transition: all 0.3s ease;
+}
