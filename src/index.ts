@@ -112,9 +112,9 @@ async function ensureConfig() {
   await ensureConfig();
   initDB();
 
+  app.use("/static", express.static(p_join(__dirname, "/static")));
   app.use("/api", route_api);
   app.use("/", route_root);
-  app.use("/static", express.static(p_join(__dirname, "/static")));
 
   app.listen(global.config.port, () => {
     logger.success(
