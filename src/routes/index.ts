@@ -22,6 +22,10 @@ function replaceAll(str: string, find: string, replace: string) {
   return str.replace(new RegExp(escapeRegExp(find), "g"), replace);
 }
 
+router.get("/404", (req, res) => {
+  res.sendFile(p_join(__dirname, "..", "public", "404.html"));
+});
+
 router.get("/*", (req, res) => {
   let fileN = req.params[0] as string;
   if (fileN.endsWith("/")) fileN += "index.html";
@@ -42,6 +46,15 @@ router.get("/*", (req, res) => {
           ),
           "    ",
           ""
+        ).replace(
+          "</body>",
+          `
+          <!-- Alert -->
+          <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+          <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+        </body>
+        `
         )
       );
     });
