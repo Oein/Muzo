@@ -31,7 +31,8 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 // init database
-import { init as initDB } from "./utils/database";
+import { init as get_db } from "./utils/database";
+import { textToAuthKey } from "./utils/authKey.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -84,7 +85,11 @@ async function ensureConfig() {
     logger.error("Could not find muzo configuration file");
     logger.info("Creating muzo configuration file...");
 
-    writeFileSync(configFile, ya_stringify(defaultConfig));
+    writeFileSync(configFile, ya_stringify(defaultConfig()));
+
+    let db = get_db();
+
+    await db.set(`user.admin.${textToAuthKey("admin", global.salt)}`, 0);
   }
 
   global.config = {
@@ -110,11 +115,13 @@ async function ensureConfig() {
 
   await ensureSalt();
   await ensureConfig();
-  initDB();
 
   app.use("/static", express.static(p_join(__dirname, "/static")));
   app.use("/api", route_api);
   app.use("/", route_root);
+
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
 
   app.listen(global.config.port, () => {
     logger.success(
