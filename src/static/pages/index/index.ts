@@ -11,6 +11,7 @@ let signinarticle: HTMLElement = document.getElementsByClassName(
 )[0]! as HTMLElement;
 
 let signinbtn = document.getElementById("signinbtn") as HTMLDivElement;
+let signin = document.getElementById("signin") as HTMLButtonElement;
 
 const handle = () => {
   if (usernameInput.value.length > 0) {
@@ -48,3 +49,35 @@ passwordInput.addEventListener("keyup", handle2);
 
 handle();
 handle2();
+
+let axios;
+let alertify;
+
+let axiosScript = document.createElement("script");
+axiosScript.src =
+  "https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js";
+document.body.appendChild(axiosScript);
+axiosScript.addEventListener("load", () => {
+  signin.addEventListener("click", () => {
+    axios
+      .post(
+        `/api/account/signin/request?id=${usernameInput.value}&pw=${passwordInput.value}`
+      )
+      .then((v) => {
+        let d = v.data as {
+          e: string | null | undefined;
+          s: string | null | undefined;
+          k: string | null | undefined;
+        };
+
+        if (d.e) {
+          alertify.error("Success message");
+        } else {
+          if (!d.s) return;
+          if (!d.k) return;
+          alertify.success("Success message");
+        }
+      })
+      .catch((e) => {});
+  });
+});
