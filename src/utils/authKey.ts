@@ -1,9 +1,9 @@
-export function idToAuthKey(id: string, salt: string): string {
-  if (id.length > 128) {
-    id = id.slice(0, 128);
+export function textToAuthKey(text: string, salt: string): string {
+  if (text.length > 128) {
+    text = text.slice(0, 128);
   }
-  const a = id.slice(0, id.length / 2);
-  const b = id.slice(id.length / 2 + 1, id.length / 2);
+  const a = text.slice(0, text.length / 2);
+  const b = text.slice(text.length / 2 + 1, text.length / 2);
   const c = a + salt + b;
   const d = btoa(c);
   let e = btoa(d + salt);
