@@ -9,8 +9,6 @@
                Muzo by Oein
   Copyright (c) 2022 All rights reserved.
 
-  Version / d.1.0.0
-  Date    / 20221015
  */
 
 import logger from "./logger/index.mjs";
