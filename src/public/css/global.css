@@ -84,6 +84,7 @@ button:hover {
   box-shadow: 0.5rem 0.5rem 1.5rem 0px #bbb;
 }
 
-.ajs-message {
-  text-shadow: none !important;
+:root {
+  --success: #00c851;
+  --error: lightcoral;
 }
