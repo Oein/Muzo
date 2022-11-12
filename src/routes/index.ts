@@ -48,13 +48,15 @@ router.get("/*", (req, res) => {
           ""
         ).replace(
           "</body>",
-          `
-          <!-- Alert -->
-          <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-          <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-          <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-        </body>
-        `
+          replaceAll(
+            `
+          </body>
+          <!-- Axios -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js" id="axios" defer async></script>
+        `,
+            "\n",
+            ""
+          )
         )
       );
     });
@@ -66,7 +68,13 @@ router.get("/*", (req, res) => {
         res.redirect("/404");
         return;
       }
-      res.send(replaceAll(replaceAll(v.toString(), "\n", ""), "  ", " "));
+      res.send(
+        replaceAll(
+          replaceAll(replaceAll(v.toString(), "\t", ""), "\n", " "),
+          "  ",
+          " "
+        )
+      );
     });
   } else {
     res.download(p_join(__dirname, "..", "public", fileN));
