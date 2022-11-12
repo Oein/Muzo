@@ -51,33 +51,72 @@ handle();
 handle2();
 
 let axios;
-let alertify;
 
-let axiosScript = document.createElement("script");
-axiosScript.src =
-  "https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js";
-document.body.appendChild(axiosScript);
-axiosScript.addEventListener("load", () => {
-  signin.addEventListener("click", () => {
-    axios
-      .post(
-        `/api/account/signin/request?id=${usernameInput.value}&pw=${passwordInput.value}`
-      )
-      .then((v) => {
-        let d = v.data as {
-          e: string | null | undefined;
-          s: string | null | undefined;
-          k: string | null | undefined;
-        };
+let alertify = {
+  error: (msg: string) => {
+    alertify.show();
+    alertify.textElement.innerText = msg;
+    alertify.textElement.style.color = "var(--error)";
+  },
+  success: (msg: string) => {
+    alertify.show();
+    alertify.textElement.innerText = msg;
+    alertify.textElement.style.color = "var(--success)";
+  },
+  show: () => {
+    alertify.textElement.style.opacity = "1";
+    alertify.lastShowed = new Date().getTime();
+    setTimeout(alertify.hide, 1100);
+  },
+  hide: () => {
+    if (new Date().getTime() - alertify.lastShowed < 1000) {
+      return;
+    }
+    alertify.textElement.style.opacity = "0";
+  },
+  lastShowed: new Date().getTime() - 10000,
+  textElement: document.getElementsByClassName(
+    "signINerror"
+  )[0] as HTMLDivElement,
+};
 
-        if (d.e) {
-          alertify.error("Success message");
-        } else {
-          if (!d.s) return;
-          if (!d.k) return;
-          alertify.success("Success message");
-        }
-      })
-      .catch((e) => {});
-  });
-});
+function signinbtnHandler() {
+  axios
+    .post(
+      `/api/account/signin/request?id=${usernameInput.value}&pw=${passwordInput.value}`
+    )
+    .then((v) => {
+      let d = v.data as {
+        e: string | null | undefined;
+        s: string | null | undefined;
+        k: string | null | undefined;
+      };
+
+      if (d.e) {
+        alertify.error(d.e);
+      } else {
+        if (!d.s) return;
+        if (!d.k) return;
+        sessionStorage["SessionKey"] = d.k;
+        alertify.success(d.s);
+        location.pathname = "/main/";
+      }
+    })
+    .catch((e) => {});
+}
+
+function enterKeyHandler(e: KeyboardEvent) {
+  if (usernameInput.value.length == 0) return;
+  if (passwordInput.value.length == 0) return;
+  if (e.key == "Enter") signinbtnHandler();
+}
+
+function main() {
+  signin.addEventListener("click", signinbtnHandler);
+
+  usernameInput.addEventListener("keyup", enterKeyHandler);
+  passwordInput.addEventListener("keyup", enterKeyHandler);
+}
+
+document.addEventListener("DOMContentLoaded", main);
+main();
