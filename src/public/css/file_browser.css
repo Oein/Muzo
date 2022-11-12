@@ -1,0 +1,94 @@
+#sidebar {
+  width: 18vw;
+  height: 100vh;
+  min-width: 12vw;
+  display: table-cell;
+  background: #dfdfe0;
+}
+
+#divider {
+  width: 3px;
+  height: 100vh;
+  display: table-cell;
+  background: #cccccc;
+  cursor: col-resize;
+}
+
+#files {
+  width: calc(100vw - 18vw - 3px);
+  height: 100vh;
+  max-width: calc(100vw - 12vw - 3px);
+  display: table-cell;
+  background: #ffffff;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.icon {
+  color: #0062f3;
+  display: inline-block;
+}
+
+#sidebar > div > * {
+  font-size: 1.5rem;
+  vertical-align: middle;
+}
+
+#sidebar > div > div {
+  display: inline-block;
+  font-family: RobotoThin;
+}
+
+#sidebar > div {
+  width: calc(100% - 20px);
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#sidebar > #dots {
+  padding-left: 12px;
+  padding-top: 12px;
+  margin: 0px;
+  margin-bottom: 12px;
+}
+
+#sidebar > #dots > * {
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  background: black;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+#sidebar > #dots > * > * {
+  font-size: 12px;
+  display: block;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+
+#sidebar > #dots > span:nth-child(1) {
+  background: #ec6a60;
+}
+
+#sidebar > #dots > span:nth-child(2) {
+  background: #f5c250;
+}
+
+#sidebar > #dots > span:nth-child(3) {
+  background: #59bc42;
+}
+
+.driveSelected {
+  background: #c8c8c8;
+}
