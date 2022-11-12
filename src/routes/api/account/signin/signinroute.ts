@@ -2,6 +2,8 @@ import express from "express";
 import { init as get_db } from "../../../../utils/database";
 import { textToAuthKey } from "../../../../utils/authKey";
 import { uid } from "uid";
+import { databasion } from "../session/sessionroute";
+import consoleColor from "../../../../logger/consoleColor.mjs";
 
 const router = express.Router();
 
@@ -30,7 +32,24 @@ router.post("/request", (req, res) => {
     let has_user = await db.get(`user.${id}.${textToAuthKey(pw, global.salt)}`);
 
     if (has_user == 0) {
-      res.send(`{"s":"Signed in","k":"${uid(128)}"}`).status(200);
+      let id = uid(128);
+      db.set(
+        `session.${databasion(
+          req.headers["user-agent"] || Math.random().toString(),
+          req.ip
+        )}.${id}`,
+        `user.${id}.${textToAuthKey(pw, global.salt)}`
+      );
+      console.log(
+        consoleColor.FgGreen + "[DB][SET]",
+        consoleColor.Reset +
+          `session.${databasion(
+            req.headers["user-agent"] || Math.random().toString(),
+            req.ip
+          )}.${id}`,
+        `user.${id}.${textToAuthKey(pw, global.salt)}`
+      );
+      res.send(`{"s":"Signed in","k":"${id}"}`).status(200);
       return;
     }
 
