@@ -1,6 +1,7 @@
 import session from "./session.js";
 import { allowedPath } from "../../../types/allowedPath";
 import * as ABPath from "./pathGoBack.js";
+import { load, done } from "./loading.js";
 
 import {
   codeExts,
@@ -56,6 +57,7 @@ function createFileDiv(name: string, iconText: string = " folder ") {
 
 export function lsAndShow() {
   files.innerHTML = "";
+  load();
   axios
     .get(`/api/files/ls?drive=${drives_paths[driveSelected]}&path=${path}`, {
       headers: {
@@ -137,10 +139,14 @@ export function lsAndShow() {
 
         files.append(cfd);
       });
+    })
+    .finally(() => {
+      done();
     });
 }
 
 export function sessionGenerateDone() {
+  load();
   axios
     .get("/api/files/drives/get", {
       headers: {
@@ -189,5 +195,8 @@ export function sessionGenerateDone() {
       }
 
       lsAndShow();
+    })
+    .finally(() => {
+      done();
     });
 }
