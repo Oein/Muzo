@@ -16,14 +16,14 @@ let files = document.getElementById("files") as HTMLDivElement;
 
 session;
 
-let driveCounts = 0;
 let driveSelected = 0;
 let drives_paths: string[] = [];
 let path = "/";
 
-let files_path: { type: string; name: string }[] = [];
 let file_selected = -1;
 let file_c = 0;
+
+let show_hidden_files = false;
 
 let last_file_click = new Date().getTime() - 100000;
 
@@ -65,8 +65,8 @@ export function lsAndShow() {
       },
     })
     .then((v) => {
-      files_path = v.data;
       v.data.forEach((d: { type: string; name: string }, i) => {
+        if (d.name.startsWith(".") && !show_hidden_files) return;
         let cfd: HTMLDivElement;
         if (d.type == "dir") {
           cfd = createFileDiv(d.name);
@@ -162,8 +162,6 @@ export function sessionGenerateDone() {
       }
 
       d = d as allowedPath[];
-
-      driveCounts = d.length;
 
       for (let i = 0; i < d.length; i++) {
         let name = d[i].pathD.trim();
