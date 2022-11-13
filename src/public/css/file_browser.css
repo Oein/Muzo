@@ -11,6 +11,7 @@
   left: 0px;
   top: 0px;
   bottom: 0px;
+  overflow: auto;
 }
 
 #divider {
@@ -51,18 +52,22 @@ body {
   user-select: none;
 }
 
-#sidebar > div > *,
+#drives > div > *,
 #files > div > * {
   font-size: 1.5rem;
   vertical-align: middle;
   user-select: none;
 }
 
+#drives {
+  margin-bottom: 15px;
+}
+
 #files > div > * {
   font-size: 1.2rem;
 }
 
-#sidebar > div > div,
+#drives > div > div,
 #files > div > div {
   display: inline-block;
   font-family: RobotoThin, system-ui, -apple-system, BlinkMacSystemFont,
@@ -71,13 +76,13 @@ body {
   font-weight: 100;
 }
 
-#sidebar > div {
+#drives > div {
   width: calc(100% - 20px);
   min-width: 12vw;
   max-width: calc(50vw - 20px);
 }
 
-#sidebar > div,
+#drives > div,
 #files > div {
   margin-left: 5px;
   margin-right: 5px;
@@ -197,4 +202,9 @@ body {
 
 .toolbtn.disable {
   cursor: not-allowed;
+}
+
+#sidebar > desc {
+  margin-left: 5px;
+  color: #797979;
 }
