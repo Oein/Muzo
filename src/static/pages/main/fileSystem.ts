@@ -43,6 +43,21 @@ files.addEventListener("click", () => {
   file_c = 0;
 });
 
+function download(url: string, name: string) {
+  let encodedUri = encodeURI(url);
+  let link = document.createElement("a");
+
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", name);
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+  done();
+}
+
 function createFileDiv(name: string, iconText: string = " folder ") {
   let containor = document.createElement("div");
   let icon = document.createElement("span");
@@ -122,6 +137,20 @@ export function lsAndShow() {
                     t = t.replace("fil__", "");
                   }
                   return;
+                } else if (d.type == "fil") {
+                  load();
+                  download(
+                    encodeURI(
+                      `/api/files/cat/?drive=${
+                        drives_paths[driveSelected]
+                      }&path=${path + d.name}&token=${sessionStorage.getItem(
+                        "SessionKey"
+                      )}`
+                    ),
+                    d.name
+                  );
+                  file_selected = -1;
+                  cfd.className = "";
                 }
               }
             }
