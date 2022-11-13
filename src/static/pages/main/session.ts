@@ -1,5 +1,7 @@
+import { sessionGenerateDone } from "./fileSystem.mjs";
+
 let session_id = sessionStorage.getItem("SessionKey");
-let sessionValid = false;
+(window as any).sessionValid = false;
 
 function sessioning() {
   if (session_id == null) {
@@ -15,11 +17,8 @@ function sessioning() {
       location.pathname = "/";
       return;
     } else {
-      sessionValid = true;
-      try {
-        ((window as any).sessionGenerateDone as any)();
-      } catch (e) {}
       sessionStorage.setItem("SessionKey", v.data.k);
+      sessionGenerateDone();
     }
   });
 }
