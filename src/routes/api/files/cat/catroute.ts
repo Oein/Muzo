@@ -1,7 +1,7 @@
 import express from "express";
 import { permission } from "../../../../types/permission";
 import getUserByDBedUserId from "../../../../utils/getUserByUserDBedID";
-import validSession from "../../../../utils/validSession";
+import { validSession_ } from "../../../../utils/validSession";
 import { join as p_join } from "path";
 
 import { pathExists } from "fs-extra";
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  let isV = await validSession(req);
+  let isV = await validSession_(req, req.query.token as string);
 
   if (isV.valid == false) {
     res.send(
@@ -61,7 +61,9 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  let joinedP = p_join(drive as string, path as string);
+  let joinedP = decodeURI(p_join(drive as string, path as string));
+
+  console.log("REQ FILE", joinedP);
 
   pathExists(joinedP).then((ex) => {
     if (!ex) {
