@@ -1,8 +1,8 @@
-import ecode from "./exts/code";
-import eimage from "./exts/image";
-import efont from "./exts/font";
-import evideo from "./exts/video";
-import eaudio from "./exts/audio";
+import ecode from "./exts/code.js";
+import eimage from "./exts/image.js";
+import efont from "./exts/font.js";
+import evideo from "./exts/video.js";
+import eaudio from "./exts/audio.js";
 
 export let codeExts = ecode;
 export let imageExts = eimage;

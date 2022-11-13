@@ -8,7 +8,7 @@ import {
   fontExts,
   videoExts,
   audioExts,
-} from "./fileExts";
+} from "./fileExts.js";
 
 let drives = document.getElementById("sidebar") as HTMLDivElement;
 let files = document.getElementById("files") as HTMLDivElement;
