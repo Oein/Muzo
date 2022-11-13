@@ -12,7 +12,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/*", (req, res) => {
+router.get("*", (req, res) => {
   res.sendFile(p_join(__dirname, "..", "..", "public", "main", "index.html"));
 });
 
