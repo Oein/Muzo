@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import route_api_files from "./files/list";
+import route_api_files from "./files/fileroute";
 import route_api_account from "./account/acountroute";
 
 router.use((req, res, next) => {
