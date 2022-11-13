@@ -81,10 +81,25 @@ router.get("/", async (req, res) => {
               name: v.name,
             });
           } else if (v.isSymbolicLink()) {
-            resV.push({
-              type: "slk",
-              name: v.name,
-            });
+            try {
+              let s = fsext.readlinkSync(p_join(joinedP, v.name));
+              let l = fsext.lstatSync(s);
+              if (l.isFile())
+                resV.push({
+                  type: "slk__fil__" + s,
+                  name: v.name,
+                });
+              if (l.isDirectory())
+                resV.push({
+                  type: "slk__dir__" + s,
+                  name: v.name,
+                });
+            } catch (e) {
+              resV.push({
+                type: "ukn",
+                name: v.name,
+              });
+            }
           } else {
             resV.push({
               type: "ukn",
