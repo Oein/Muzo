@@ -1,4 +1,4 @@
-import { sessionGenerateDone } from "./fileSystem.mjs";
+import { sessionGenerateDone } from "./fileSystem.js";
 
 let session_id = sessionStorage.getItem("SessionKey");
 (window as any).sessionValid = false;
