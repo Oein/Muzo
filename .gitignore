@@ -3,6 +3,7 @@ node_modules
 
 # output
 dist
+mini
 
 # yarn
 yarn.lock
