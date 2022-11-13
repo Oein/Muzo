@@ -146,6 +146,7 @@ export function sessionGenerateDone() {
         if (i == 0) drive_.className = "driveSelected";
 
         drive_.addEventListener("click", () => {
+          if (driveSelected == i && path == "") return;
           drives.children[driveSelected + 1].className = "";
           driveSelected = i;
           drive_.className = "driveSelected";
