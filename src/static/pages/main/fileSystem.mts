@@ -53,7 +53,7 @@ export function lsAndShow() {
           cfd = createFileDiv(d.name);
         } else if (d.type == "fil") {
           cfd = createFileDiv(d.name, " draft ");
-        } else if (d.type == "slk") {
+        } else if (d.type.startsWith("slk")) {
           cfd = createFileDiv(d.name, " link ");
         } else {
           cfd = createFileDiv(d.name, " question_mark ");
@@ -67,6 +67,17 @@ export function lsAndShow() {
                 if (d.type == "dir") {
                   path += d.name + "/";
                   lsAndShow();
+                  return;
+                } else if (d.type.includes("slk")) {
+                  let t = d.type.replace("slk__", "");
+                  if (t.startsWith("dir")) {
+                    t = t.replace("dir__", "");
+                    path = t;
+                    lsAndShow();
+                    return;
+                  } else {
+                    t = t.replace("fil__", "");
+                  }
                   return;
                 }
               }
