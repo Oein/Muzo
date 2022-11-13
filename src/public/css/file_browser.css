@@ -46,12 +46,14 @@ body {
 .icon {
   color: #0062f3;
   display: inline-block;
+  user-select: none;
 }
 
 #sidebar > div > *,
 #files > div > * {
   font-size: 1.5rem;
   vertical-align: middle;
+  user-select: none;
 }
 
 #files > div > * {
@@ -81,6 +83,7 @@ body {
   border-radius: 5px;
   overflow: hidden;
   white-space: nowrap;
+  user-select: none;
 }
 
 #files > div {
@@ -104,6 +107,7 @@ body {
   display: inline-block;
   margin-left: 6px;
   cursor: pointer;
+  user-select: none;
 }
 
 #sidebar > #dots > * > * {
@@ -111,6 +115,7 @@ body {
   display: block;
   margin-left: 1px;
   margin-top: 1px;
+  user-select: none;
 }
 
 #sidebar > #dots > span:nth-child(1) {
@@ -137,6 +142,7 @@ body {
   right: 0px;
   background: #ededed;
   border-bottom: 1px solid #cbcbcb;
+  user-select: none;
 }
 
 #back,
