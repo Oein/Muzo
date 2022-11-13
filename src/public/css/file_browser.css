@@ -24,6 +24,7 @@
 }
 
 #files {
+  overflow: scroll;
   width: calc(100vw - 18vw - 3px);
   height: calc(100vh - 3rem);
   max-width: calc(100vw - 12vw - 3px);
