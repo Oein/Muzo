@@ -13,7 +13,7 @@ export default (): Config => {
         allowedPaths: [
           {
             pathD: "/",
-            permissions: [permission.Read, permission.Write, permission.Delete],
+            permissions: [permission.Read, permission.Write],
           },
         ],
         authed: textToAuthKey("admin", global.salt),
