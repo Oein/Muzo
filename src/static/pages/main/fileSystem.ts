@@ -11,7 +11,7 @@ import {
   audioExts,
 } from "./fileExts.js";
 
-let drives = document.getElementById("sidebar") as HTMLDivElement;
+let drives = document.getElementById("drives") as HTMLDivElement;
 let files = document.getElementById("files") as HTMLDivElement;
 
 session;
@@ -28,9 +28,9 @@ let show_hidden_files = false;
 let last_file_click = new Date().getTime() - 100000;
 
 export function changePath(driveX: number, pathX: string) {
-  drives.children[driveSelected + 1].className = "";
+  drives.children[driveSelected].className = "";
   driveSelected = driveX;
-  drives.children[driveSelected + 1].className = "driveSelected";
+  drives.children[driveSelected].className = "driveSelected";
   path = pathX;
   lsAndShow();
 }
@@ -210,7 +210,7 @@ export function sessionGenerateDone() {
 
         drive_.addEventListener("click", () => {
           if (driveSelected == i && path == "") return;
-          drives.children[driveSelected + 1].className = "";
+          drives.children[driveSelected].className = "";
           driveSelected = i;
           drive_.className = "driveSelected";
           path = "";
