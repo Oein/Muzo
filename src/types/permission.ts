@@ -3,5 +3,4 @@ export enum permission {
   "User" = "u",
   "Read" = "r",
   "Write" = "w",
-  "Delete" = "d",
 }
