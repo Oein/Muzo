@@ -5,6 +5,10 @@
   max-width: 50vw;
   display: table-cell;
   background: #dfdfe0;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
 }
 
 #divider {
@@ -13,15 +17,24 @@
   display: table-cell;
   background: #cccccc;
   cursor: col-resize;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 18vw;
 }
 
 #files {
   width: calc(100vw - 18vw - 3px);
-  height: 100vh;
+  height: calc(100vh - 3rem);
   max-width: calc(100vw - 12vw - 3px);
   min-width: calc(100vw - 50vw - 3px);
   display: table-cell;
   background: #ffffff;
+  position: fixed;
+  top: 3rem;
+  padding-top: 5px;
+  bottom: 0px;
+  right: 0px;
 }
 
 body {
@@ -40,10 +53,6 @@ body {
   vertical-align: middle;
 }
 
-#files {
-  display: table-cell;
-}
-
 #files > div > * {
   font-size: 1.2rem;
 }
@@ -54,9 +63,14 @@ body {
   font-family: RobotoThin;
 }
 
+#sidebar > div {
+  width: calc(100% - 20px);
+  min-width: 12vw;
+  max-width: calc(50vw - 20px);
+}
+
 #sidebar > div,
 #files > div {
-  width: calc(100% - 20px);
   margin-left: 5px;
   margin-right: 5px;
   padding: 5px;
@@ -66,16 +80,19 @@ body {
   border-radius: 5px;
   overflow: hidden;
   white-space: nowrap;
-  width: inherit;
-  min-width: 12vw;
-  max-width: calc(50vw - 20px);
+}
+
+#files > div {
+  width: calc(100% - 20px);
+  min-width: calc(100vw - 50vw - 3px - 20px);
+  max-width: calc(100vw - 12vw - 3px - 20px);
 }
 
 #sidebar > #dots {
   padding-left: 12px;
-  padding-top: 12px;
+  padding-top: calc((3rem - 14px) / 2);
   margin: 0px;
-  margin-bottom: 12px;
+  margin-bottom: calc((3rem - 14px) / 2);
 }
 
 #sidebar > #dots > * {
@@ -109,4 +126,63 @@ body {
 
 .driveSelected {
   background: #c8c8c8;
+}
+
+#tools {
+  position: fixed;
+  left: calc(18vw + 3px);
+  top: 0px;
+  height: 3rem;
+  right: 0px;
+  background: #ededed;
+  border-bottom: 1px solid #cbcbcb;
+}
+
+#back,
+#go {
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.6rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.toolbtn > span {
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.enable {
+  color: #797979;
+}
+
+.disable {
+  color: #b2b2b2;
+}
+
+#back {
+  margin-left: 1rem;
+}
+
+.toolbtn {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  border-radius: 5px;
+}
+
+.toolbtn:hover {
+  background: #e5e5e5;
+}
+
+.toolbtn.enable {
+  cursor: pointer;
+}
+
+.toolbtn.disable {
+  cursor: not-allowed;
 }
