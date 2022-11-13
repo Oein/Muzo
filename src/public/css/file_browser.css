@@ -34,17 +34,28 @@ body {
   display: inline-block;
 }
 
-#sidebar > div > * {
+#sidebar > div > *,
+#files > div > * {
   font-size: 1.5rem;
   vertical-align: middle;
 }
 
-#sidebar > div > div {
+#files {
+  display: table-cell;
+}
+
+#files > div > * {
+  font-size: 1.2rem;
+}
+
+#sidebar > div > div,
+#files > div > div {
   display: inline-block;
   font-family: RobotoThin;
 }
 
-#sidebar > div {
+#sidebar > div,
+#files > div {
   width: calc(100% - 20px);
   margin-left: 5px;
   margin-right: 5px;
