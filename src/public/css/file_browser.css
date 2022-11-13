@@ -2,6 +2,7 @@
   width: 18vw;
   height: 100vh;
   min-width: 12vw;
+  max-width: 50vw;
   display: table-cell;
   background: #dfdfe0;
 }
@@ -18,6 +19,7 @@
   width: calc(100vw - 18vw - 3px);
   height: 100vh;
   max-width: calc(100vw - 12vw - 3px);
+  min-width: calc(100vw - 50vw - 3px);
   display: table-cell;
   background: #ffffff;
 }
@@ -51,6 +53,11 @@ body {
   padding-bottom: 2px;
   cursor: pointer;
   border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: inherit;
+  min-width: 12vw;
+  max-width: calc(50vw - 20px);
 }
 
 #sidebar > #dots {
