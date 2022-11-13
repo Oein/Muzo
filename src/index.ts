@@ -24,6 +24,7 @@ import { join as p_join } from "path";
 // router imports
 import route_api from "./routes/api/apiroute";
 import route_root from "./routes/index";
+import route_main from "./routes/main/index";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -114,6 +115,7 @@ async function ensureConfig() {
   await ensureSalt();
   await ensureConfig();
 
+  app.use("/main", route_main);
   app.use("/static", express.static(p_join(__dirname, "/static")));
   app.use("/api", route_api);
   app.use("/", route_root);
