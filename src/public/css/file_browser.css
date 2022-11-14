@@ -161,16 +161,6 @@ body {
   user-select: none;
 }
 
-#back,
-#go {
-  vertical-align: middle;
-  text-align: center;
-  display: inline-block;
-  font-size: 1.6rem;
-  margin-top: 0.4rem;
-  margin-bottom: 0.5rem;
-}
-
 .toolbtn > span {
   vertical-align: middle;
   text-align: center;
@@ -196,6 +186,12 @@ body {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
   border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.6rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .toolbtn:hover {

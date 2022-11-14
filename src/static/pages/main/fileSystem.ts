@@ -23,6 +23,7 @@ let path = "/";
 
 let file_selected: number[] = [];
 let file_c = 0;
+let file_type = "ukn";
 
 let show_hidden_files = false;
 
@@ -30,6 +31,8 @@ let last_file_click = new Date().getTime() - 100000;
 
 let os: string = "";
 let ua = navigator.userAgent as string;
+
+let tools_download = document.getElementById("download") as HTMLSpanElement;
 
 // remove zoombox
 let removes = [
@@ -46,71 +49,67 @@ removes.map((v) => {
 ((window as any).zoombox as any).option({
   enableZoomButton: true,
   hideWatermark: true,
-})(
-  // user os
-  function () {
-    if (ua.match(/Win(dows )?NT 6\.0/)) {
-      os = "Windows Vista";
-    } else if (ua.match(/Win(dows )?(NT 5\.1|XP)/)) {
+});
+
+(function () {
+  if (ua.match(/Win(dows )?NT 6\.0/)) {
+    os = "Windows Vista";
+  } else if (ua.match(/Win(dows )?(NT 5\.1|XP)/)) {
+    os = "Windows XP";
+  } else {
+    if (ua.indexOf("Windows NT 5.1") != -1 || ua.indexOf("Windows XP") != -1) {
       os = "Windows XP";
-    } else {
-      if (
-        ua.indexOf("Windows NT 5.1") != -1 ||
-        ua.indexOf("Windows XP") != -1
-      ) {
-        os = "Windows XP";
-      } else if (
-        ua.indexOf("Windows NT 7.0") != -1 ||
-        ua.indexOf("Windows NT 6.1") != -1
-      ) {
-        os = "Windows 7";
-      } else if (
-        ua.indexOf("Windows NT 8.0") != -1 ||
-        ua.indexOf("Windows NT 6.2") != -1
-      ) {
-        os = "Windows 8";
-      } else if (
-        ua.indexOf("Windows NT 8.1") != -1 ||
-        ua.indexOf("Windows NT 6.3") != -1
-      ) {
-        os = "Windows 8.1";
-      } else if (
-        ua.indexOf("Windows NT 10.0") != -1 ||
-        ua.indexOf("Windows NT 6.4") != -1
-      ) {
-        os = "Windows 10";
-      } else if (
-        ua.indexOf("iPad") != -1 ||
-        ua.indexOf("iPhone") != -1 ||
-        ua.indexOf("iPod") != -1
-      ) {
-        os = "Apple iOS";
-      } else if (ua.indexOf("Android") != -1) {
-        os = "Android OS";
-      } else if (ua.match(/Win(dows )?NT( 4\.0)?/)) {
-        os = "Windows NT";
-      } else if (ua.match(/Mac|PPC/)) {
-        os = "Mac OS";
-      } else if (ua.match(/Linux/)) {
-        os = "Linux";
-      } else if (ua.match(/(Free|Net|Open)BSD/)) {
-        os = RegExp.$1 + "BSD";
-      } else if (ua.match(/SunOS/)) {
-        os = "Solaris";
-      }
-    }
-    if (os.indexOf("Windows") != -1) {
-      if (
-        navigator.userAgent.indexOf("WOW64") > -1 ||
-        navigator.userAgent.indexOf("Win64") > -1
-      ) {
-        os += " 64bit";
-      } else {
-        os += " 32bit";
-      }
+    } else if (
+      ua.indexOf("Windows NT 7.0") != -1 ||
+      ua.indexOf("Windows NT 6.1") != -1
+    ) {
+      os = "Windows 7";
+    } else if (
+      ua.indexOf("Windows NT 8.0") != -1 ||
+      ua.indexOf("Windows NT 6.2") != -1
+    ) {
+      os = "Windows 8";
+    } else if (
+      ua.indexOf("Windows NT 8.1") != -1 ||
+      ua.indexOf("Windows NT 6.3") != -1
+    ) {
+      os = "Windows 8.1";
+    } else if (
+      ua.indexOf("Windows NT 10.0") != -1 ||
+      ua.indexOf("Windows NT 6.4") != -1
+    ) {
+      os = "Windows 10";
+    } else if (
+      ua.indexOf("iPad") != -1 ||
+      ua.indexOf("iPhone") != -1 ||
+      ua.indexOf("iPod") != -1
+    ) {
+      os = "Apple iOS";
+    } else if (ua.indexOf("Android") != -1) {
+      os = "Android OS";
+    } else if (ua.match(/Win(dows )?NT( 4\.0)?/)) {
+      os = "Windows NT";
+    } else if (ua.match(/Mac|PPC/)) {
+      os = "Mac OS";
+    } else if (ua.match(/Linux/)) {
+      os = "Linux";
+    } else if (ua.match(/(Free|Net|Open)BSD/)) {
+      os = RegExp.$1 + "BSD";
+    } else if (ua.match(/SunOS/)) {
+      os = "Solaris";
     }
   }
-)();
+  if (os.indexOf("Windows") != -1) {
+    if (
+      navigator.userAgent.indexOf("WOW64") > -1 ||
+      navigator.userAgent.indexOf("Win64") > -1
+    ) {
+      os += " 64bit";
+    } else {
+      os += " 32bit";
+    }
+  }
+})();
 
 // blank click
 files.addEventListener("click", () => {
@@ -122,6 +121,19 @@ files.addEventListener("click", () => {
     file_selected = [];
   }
   file_c = 0;
+});
+
+tools_download.addEventListener("click", () => {
+  if (!tools_download.classList.contains("enable")) return;
+  download(
+    `/api/files/cat/?drive=${drives_paths[driveSelected]}&path=${
+      path +
+      (files.children[file_selected[0] - 1].children[2] as HTMLDivElement)
+        .innerText
+    }&token=${sessionStorage.getItem("SessionKey")}`,
+    (files.children[file_selected[0] - 1].children[2] as HTMLDivElement)
+      .innerText
+  );
 });
 
 export function changePath(driveX: number, pathX: string) {
@@ -143,6 +155,9 @@ function classNamer() {
     files.children[v - 1].className = "driveSelected";
     (files.children[v - 1].children[0] as HTMLInputElement).checked = true;
   });
+  if (file_selected.length == 1 && file_type == "fil")
+    tools_download.className = "enable toolbtn";
+  else tools_download.className = "disable toolbtn";
 }
 
 function download(url: string, name: string) {
@@ -185,6 +200,7 @@ function fileClickHnadler(
   i: number,
   d: { type: string; name: string }
 ) {
+  file_type = d.type;
   if (
     (e.target as HTMLInputElement | HTMLDivElement).classList.contains("cb")
   ) {
