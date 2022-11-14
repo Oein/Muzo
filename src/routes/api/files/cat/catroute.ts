@@ -63,8 +63,6 @@ router.get("/", async (req, res) => {
 
   let joinedP = decodeURI(p_join(drive as string, path as string));
 
-  console.log("REQ FILE", joinedP);
-
   pathExists(joinedP).then((ex) => {
     if (!ex) {
       res.send(
