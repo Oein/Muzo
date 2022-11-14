@@ -230,6 +230,10 @@ function fileClickHnadler(
           if (videoExts.includes(ext)) alert("Play Movie");
           if (codeExts.includes(ext)) alert("Editor");
           if (imageExts.includes(ext)) {
+            if (ext == "heic") {
+              alert("Muzo doesn't support apple's image extension [HEIC].");
+              return;
+            }
             let img_ = document.createElement("img");
             img_.src = encodeURI(
               `/api/files/cat/?drive=${drives_paths[driveSelected]}&path=${
@@ -247,7 +251,6 @@ function fileClickHnadler(
               img_.click();
             });
           }
-          console.log("EXT", ext);
         }
 
         last_file_click = new Date().getTime() - 1000;
