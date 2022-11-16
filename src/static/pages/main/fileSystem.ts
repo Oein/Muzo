@@ -22,9 +22,7 @@ let drives_paths: string[] = [];
 let path = "/";
 
 let file_selected: number[] = [];
-let files_list: { type: string; name: string }[] = [];
 let file_c = 0;
-let file_type = "ukn";
 
 let show_hidden_files = false;
 
@@ -224,7 +222,6 @@ function fileClickHnadler(
   i: number,
   d: { type: string; name: string }
 ) {
-  file_type = d.type;
   if (
     (e.target as HTMLInputElement | HTMLDivElement).classList.contains("cb")
   ) {
@@ -313,7 +310,6 @@ export function lsAndShow() {
       },
     })
     .then((v) => {
-      files_list = v.data;
       v.data.forEach((d: { type: string; name: string }, i) => {
         if (d.name.startsWith(".") && !show_hidden_files) {
           return;
