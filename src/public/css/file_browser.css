@@ -15,10 +15,11 @@
   overflow: auto;
   padding-bottom: 100px;
   box-sizing: border-box;
+  z-index: -3;
 }
 
 #divider {
-  width: 3px;
+  width: 2px;
   height: 100vh;
   display: table-cell;
   background: #cccccc;
@@ -27,14 +28,16 @@
   top: 0px;
   bottom: 0px;
   left: 18vw;
+  transition: width 0.3s;
+  z-index: -2;
 }
 
 #files {
   overflow: scroll;
-  width: calc(100vw - 18vw - 3px);
+  width: calc(100vw - 18vw - 2px);
   height: calc(100vh - 3rem);
-  max-width: calc(100vw - 12vw - 3px);
-  min-width: calc(100vw - 50vw - 3px);
+  max-width: calc(100vw - 12vw - 2px);
+  min-width: calc(100vw - 50vw - 2px);
   display: table-cell;
   background: #ffffff;
   position: fixed;
@@ -45,6 +48,7 @@
   overflow: auto;
   padding-bottom: 100px;
   box-sizing: border-box;
+  z-index: -3;
 }
 
 body {
@@ -152,7 +156,7 @@ body {
 
 #tools {
   position: fixed;
-  left: calc(18vw + 3px);
+  left: calc(18vw + 2px);
   top: 0px;
   height: 3rem;
   right: 0px;
@@ -216,7 +220,6 @@ body {
   display: inline-block;
 }
 
-/* Tooltip text */
 .toolbtn .tooltiptext {
   visibility: hidden;
   background-color: rgba(0, 0, 0, 0.8);
@@ -225,10 +228,8 @@ body {
   width: max-content;
   padding: 5px 10px;
   border-radius: 6px;
-
-  /* Position the tooltip text - see examples below! */
   position: absolute;
-  z-index: 1;
+  z-index: 4;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
@@ -236,14 +237,14 @@ body {
   font-size: 1.2rem;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .toolbtn:hover .tooltiptext {
   visibility: visible;
 }
 
 .toolbtn .tooltiptext {
   opacity: 0;
-  transition: opacity 0.1s;
+  transition: opacity 0.1s transform 0.1s;
+  z-index: 4;
 }
 
 .toolbtn:hover .tooltiptext {
@@ -253,10 +254,41 @@ body {
 .toolbtn .tooltiptext::after {
   content: " ";
   position: absolute;
-  bottom: 100%; /* At the top of the tooltip */
+  bottom: 100%;
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent black transparent;
+}
+
+#divider:hover {
+  width: 6px;
+  transform: translateX(-1px);
+}
+
+#dividerRound {
+  opacity: 0;
+  transition: 0.3s;
+  width: 0px;
+  height: 30px;
+  border-radius: 1px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#divider:hover > #dividerRound {
+  opacity: 1;
+  height: 50px;
+  width: 3px;
+  background: white;
+  border-radius: 2px;
+  transition-delay: 0.2s;
+}
+
+#divider:hover {
+  background: black;
+  opacity: 1;
 }

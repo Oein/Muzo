@@ -23,8 +23,8 @@ document.addEventListener("mousemove", (e) => {
 
   drives__.style.width = `${(x / window_w) * 100}vw`;
   divider__.style.left = `${(x / window_w) * 100}vw`;
-  files__.style.left = `${((x + 3) / window_w) * 100}vw`;
-  tools__.style.left = `${((x + 3) / window_w) * 100}vw`;
-  files__.style.width = `${((window_w - x - 3) / window_w) * 100}vw`;
-  tools__.style.width = `${((window_w - x - 3) / window_w) * 100}vw`;
+  files__.style.left = `${((x + 2) / window_w) * 100}vw`;
+  tools__.style.left = `${((x + 2) / window_w) * 100}vw`;
+  files__.style.width = `${((window_w - x - 4) / window_w) * 100}vw`;
+  tools__.style.width = `${((window_w - x - 4) / window_w) * 100}vw`;
 });
