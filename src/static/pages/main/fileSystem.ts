@@ -254,6 +254,7 @@ function fileClickHnadler(
           path += d.name + "/";
           ABPath.forward(driveSelected, path);
           lsAndShow();
+          file_selected = [];
         }
         if (d.type.startsWith("slk")) {
           alert("Muzo doesn't supports Symbolic links.");
@@ -290,6 +291,7 @@ function fileClickHnadler(
           }
         }
 
+        file_selected = [];
         last_file_click = new Date().getTime() - 1000;
         return;
       }
@@ -357,6 +359,7 @@ export function lsAndShow() {
       });
     })
     .finally(() => {
+      classNamer();
       done();
     });
 }
