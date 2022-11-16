@@ -32,6 +32,9 @@ let os: string = "";
 let ua = navigator.userAgent as string;
 
 let tools_download = document.getElementById("download") as HTMLSpanElement;
+let tools_download_zip = document.getElementById(
+  "downloadzip"
+) as HTMLSpanElement;
 
 // remove zoombox
 let removes = [
@@ -153,6 +156,25 @@ tools_download.addEventListener("click", () => {
   }
 });
 
+tools_download_zip.addEventListener("click", () => {
+  if (!tools_download.classList.contains("enable")) return;
+  let fileList: string[] = [];
+  file_selected.forEach((v, i) => {
+    fileList.push(
+      (files.children[v - 1].children[2] as HTMLDivElement).innerText
+    );
+  });
+  download(
+    `/api/files/zipcat/?drive=${
+      drives_paths[driveSelected]
+    }&path=${path}&token=${sessionStorage.getItem(
+      "SessionKey"
+    )}&file=${fileList.join("///")}`,
+    (files.children[file_selected[0] - 1].children[2] as HTMLDivElement)
+      .innerText
+  );
+});
+
 export function changePath(driveX: number, pathX: string) {
   drives.children[driveSelected].className = "";
   driveSelected = driveX;
@@ -177,9 +199,13 @@ function classNamer() {
     if (ty.startsWith("question")) enable = false;
     (files.children[v - 1].children[0] as HTMLInputElement).checked = true;
   });
-  if (file_selected.length >= 1 && enable)
+  if (file_selected.length >= 1 && enable) {
     tools_download.className = "enable toolbtn";
-  else tools_download.className = "disable toolbtn";
+    tools_download_zip.className = "enable toolbtn";
+  } else {
+    tools_download.className = "disable toolbtn";
+    tools_download_zip.className = "disable toolbtn";
+  }
 }
 
 function download(url: string, name: string) {

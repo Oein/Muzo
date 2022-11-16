@@ -65,6 +65,7 @@ router.get("/", async (req, res) => {
   }
 
   let joinedP = decodeURI(p_join(drive as string, path as string));
+  if (joinedP.at(-1) == "/") joinedP = joinedP.slice(0, -1);
 
   fs.pathExists(joinedP).then((ex) => {
     if (!ex) {
@@ -81,16 +82,19 @@ router.get("/", async (req, res) => {
     function threadFor(parm: number) {
       if (parm >= fileNames.length) {
         let n = "";
-        if ((path as string).trim() == "" || (path as string).trim() == "/") {
-          let tmp = (drive as string).split("/");
-          n = tmp[tmp.length - 1];
+        let tmp = joinedP.split("/");
+
+        if (tmp.length < 2 && tmp[tmp.length - 1] == "") {
+          n = "root directory";
         } else {
-          let tmp = (path as string).split("/");
           n = tmp[tmp.length - 1];
+          if (tmp[tmp.length - 1].includes(".")) {
+            n = tmp[tmp.length - 1].split(".").join("_");
+          }
         }
 
-        if (n == "") {
-          n = "root directory";
+        if (fileNames.length == 1) {
+          n = fileNames[0];
         }
 
         res.attachment(`${n}.zip`).type("zip");
