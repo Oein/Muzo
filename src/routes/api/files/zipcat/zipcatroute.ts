@@ -109,7 +109,10 @@ router.get("/", async (req, res) => {
 
         fs.lstat(p_join(joinedP, fileNames[parm])).then((v) => {
           if (v.isDirectory()) {
-            zip.directory(p_join(joinedP, fileNames[parm]), false);
+            zip.directory(
+              p_join(joinedP, fileNames[parm]),
+              fileNames[parm] + "/"
+            );
           } else {
             zip.append(fs.createReadStream(p_join(joinedP, fileNames[parm])), {
               name: fileNames[parm],
