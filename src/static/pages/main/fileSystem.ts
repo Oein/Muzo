@@ -137,6 +137,21 @@ tools_download.addEventListener("click", () => {
         .innerText
     );
   } else {
+    let fileList: string[] = [];
+    file_selected.forEach((v, i) => {
+      fileList.push(
+        (files.children[v - 1].children[2] as HTMLDivElement).innerText
+      );
+    });
+    download(
+      `/api/files/zipcat/?drive=${
+        drives_paths[driveSelected]
+      }&path=${path}&token=${sessionStorage.getItem(
+        "SessionKey"
+      )}&file=${fileList.join("///")}`,
+      (files.children[file_selected[0] - 1].children[2] as HTMLDivElement)
+        .innerText
+    );
   }
 });
 
