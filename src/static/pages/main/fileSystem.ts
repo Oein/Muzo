@@ -22,6 +22,7 @@ let drives_paths: string[] = [];
 let path = "/";
 
 let file_selected: number[] = [];
+let files_list: { type: string; name: string }[] = [];
 let file_c = 0;
 let file_type = "ukn";
 
@@ -125,15 +126,18 @@ files.addEventListener("click", () => {
 
 tools_download.addEventListener("click", () => {
   if (!tools_download.classList.contains("enable")) return;
-  download(
-    `/api/files/cat/?drive=${drives_paths[driveSelected]}&path=${
-      path +
+  if (file_selected.length == 1) {
+    download(
+      `/api/files/cat/?drive=${drives_paths[driveSelected]}&path=${
+        path +
+        (files.children[file_selected[0] - 1].children[2] as HTMLDivElement)
+          .innerText
+      }&token=${sessionStorage.getItem("SessionKey")}`,
       (files.children[file_selected[0] - 1].children[2] as HTMLDivElement)
         .innerText
-    }&token=${sessionStorage.getItem("SessionKey")}`,
-    (files.children[file_selected[0] - 1].children[2] as HTMLDivElement)
-      .innerText
-  );
+    );
+  } else {
+  }
 });
 
 export function changePath(driveX: number, pathX: string) {
@@ -146,6 +150,7 @@ export function changePath(driveX: number, pathX: string) {
 
 function classNamer() {
   file_selected.sort();
+  let enable = true;
   if (file_selected[file_selected.length - 1] > files.childElementCount) return;
   for (let i = 0; i < files.childElementCount; i++) {
     files.children[i].className = "";
@@ -153,9 +158,13 @@ function classNamer() {
   }
   file_selected.forEach((v, i) => {
     files.children[v - 1].className = "driveSelected";
+    let ty = (files.children[v - 1] as HTMLDivElement).innerText.trim();
+    console.log(ty);
+    if (ty.startsWith("link")) enable = false;
+    if (ty.startsWith("question")) enable = false;
     (files.children[v - 1].children[0] as HTMLInputElement).checked = true;
   });
-  if (file_selected.length == 1 && file_type == "fil")
+  if (file_selected.length >= 1 && enable)
     tools_download.className = "enable toolbtn";
   else tools_download.className = "disable toolbtn";
 }
@@ -289,6 +298,7 @@ export function lsAndShow() {
       },
     })
     .then((v) => {
+      files_list = v.data;
       v.data.forEach((d: { type: string; name: string }, i) => {
         if (d.name.startsWith(".") && !show_hidden_files) {
           return;
@@ -379,8 +389,10 @@ export function sessionGenerateDone() {
           drives.children[driveSelected].className = "";
           driveSelected = i;
           drive_.className = "driveSelected";
+          tools_download.className = "disable toolbtn";
           path = "";
           ABPath.forward(driveSelected, path);
+          file_selected = [];
           lsAndShow();
         });
 
