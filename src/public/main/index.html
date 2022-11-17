@@ -54,8 +54,29 @@
           ><span class="material-symbols-outlined"> refresh </span>
           <span class="tooltiptext">Refresh</span>
         </span>
+        <span id="media" class="enable toolbtn">
+          <label for="mediaOpen"
+            ><span class="material-symbols-outlined"> play_arrow </span>
+          </label>
+          <span class="tooltiptext">Playing media</span>
+          <div class="mediaSmallPlayer close">
+            <div>
+              <div>Playing 333.mp4</div>
+              <span
+                ><span class="material-symbols-outlined">
+                  open_in_full
+                </span></span
+              >
+            </div>
+            <video src="/testVideo.mp4" controls autoplay></video>
+          </div>
+        </span>
       </div>
       <div id="imgs"></div>
+    </div>
+
+    <div style="display: none">
+      <input id="mediaOpen" type="checkbox" />
     </div>
 
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
@@ -74,5 +95,10 @@
     <script type="module" src="/static/pages/main/fileSystem.js" defer></script>
     <script type="module" src="/static/pages/main/loading.js" defer></script>
     <script type="module" src="/static/pages/main/refresh.js" defer></script>
+    <script
+      type="module"
+      src="/static/pages/main/mediaPlayerBTN.js"
+      defer
+    ></script>
   </body>
 </html>
