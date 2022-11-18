@@ -70,7 +70,6 @@ export function back() {
 back_btn.addEventListener("click", () => {
   if (!can_go_back()) return;
   let b = back();
-  console.log(b);
   changePath(b.drive, b.path);
 });
 

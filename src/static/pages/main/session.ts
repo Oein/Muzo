@@ -10,12 +10,9 @@ function sessioning() {
     return;
   }
 
-  console.log("session id", session_id);
-
   load();
   axios.get(`/api/account/session/valid?token=${session_id}`).then((v) => {
     done();
-    console.log(v.data);
     if (v.data.e) {
       location.pathname = "/";
       return;
