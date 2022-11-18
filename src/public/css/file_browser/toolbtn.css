@@ -48,6 +48,12 @@
   display: inline-block;
 }
 
+.toolbtn:active > span:nth-child(1),
+#media > label > span:active {
+  scale: 0.88;
+  transition: 0.3s all ease;
+}
+
 .enable {
   color: #797979;
 }
