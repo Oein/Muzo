@@ -1,0 +1,42 @@
+.mediaSmallPlayer {
+  background-color: #e7e8e9;
+  border: 1px solid #a9a9a9;
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.3);
+  color: black;
+  text-align: center;
+  width: 300px;
+  min-height: 200px;
+  height: max-content;
+  padding: 5px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 4;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+}
+
+.mediaSmallPlayer > video {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.playing > label > span {
+  animation: infinite;
+  animation-name: ani1;
+  animation-duration: 2s;
+  scale: 1.2;
+}
+
+@keyframes ani1 {
+  0% {
+    scale: 1.2;
+  }
+  50% {
+    scale: 1.4;
+  }
+  100% {
+    scale: 1.2;
+  }
+}

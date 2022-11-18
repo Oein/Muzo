@@ -1,0 +1,37 @@
+#sidebar > #dots {
+  padding-left: 12px;
+  padding-top: calc((3rem - 14px) / 2);
+  margin: 0px;
+  margin-bottom: calc((3rem - 14px) / 2);
+}
+
+#sidebar > #dots > * {
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  background: black;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#sidebar > #dots > * > * {
+  font-size: 12px;
+  display: block;
+  margin-left: 1px;
+  margin-top: 1px;
+  user-select: none;
+}
+
+#sidebar > #dots > span:nth-child(1) {
+  background: #ec6a60;
+}
+
+#sidebar > #dots > span:nth-child(2) {
+  background: #f5c250;
+}
+
+#sidebar > #dots > span:nth-child(3) {
+  background: #59bc42;
+}

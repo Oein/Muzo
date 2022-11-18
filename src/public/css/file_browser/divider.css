@@ -1,0 +1,44 @@
+#divider:hover {
+  width: 6px;
+  transform: translateX(-1px);
+}
+
+#dividerRound {
+  opacity: 0;
+  transition: 0.3s;
+  width: 0px;
+  height: 30px;
+  border-radius: 1px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#divider:hover > #dividerRound {
+  opacity: 1;
+  height: 50px;
+  width: 3px;
+  background: white;
+  border-radius: 2px;
+  transition-delay: 0.2s;
+}
+
+#divider:hover {
+  background: black;
+  opacity: 1;
+}
+
+#divider {
+  width: 2px;
+  height: 100vh;
+  display: table-cell;
+  background: #cccccc;
+  cursor: col-resize;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 18vw;
+  transition: width 0.3s;
+  z-index: -2;
+}

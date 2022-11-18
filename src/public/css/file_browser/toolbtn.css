@@ -1,0 +1,61 @@
+.toolbtn {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.6rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.toolbtn:hover {
+  background: #e5e5e5;
+}
+
+.toolbtn.enable {
+  cursor: pointer;
+}
+
+.toolbtn.disable {
+  cursor: not-allowed;
+}
+
+.toolbtn {
+  position: relative;
+  display: inline-block;
+}
+
+#tools {
+  position: fixed;
+  left: calc(18vw + 2px);
+  top: 0px;
+  height: 3rem;
+  right: 0px;
+  background: #ededed;
+  border-bottom: 1px solid #cbcbcb;
+  user-select: none;
+}
+
+.toolbtn > span,
+#media > label > span {
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.enable {
+  color: #797979;
+}
+
+.disable {
+  color: #b2b2b2;
+}
+
+#back {
+  margin-left: 1rem;
+}
