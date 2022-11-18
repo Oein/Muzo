@@ -68,7 +68,12 @@
                 </span></span
               >
             </div>
-            <video src="/testVideo.mp4" controls autoplay></video>
+            <div id="video-container" class="hide">
+              <video src="/testVideo.mp4" controls autoplay></video>
+            </div>
+            <div id="audio-container" class="hide">
+              <audio src="/testAudio.mp3" controls autoplay></audio>
+            </div>
           </div>
         </span>
       </div>
@@ -98,6 +103,11 @@
     <script
       type="module"
       src="/static/pages/main/mediaPlayerBTN.js"
+      defer
+    ></script>
+    <script
+      type="module"
+      src="/static/pages/main/mediaPlayer.js"
       defer
     ></script>
   </body>
