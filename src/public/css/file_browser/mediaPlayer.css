@@ -17,7 +17,7 @@
   font-size: 1.2rem;
 }
 
-.mediaSmallPlayer > video {
+#video-container > video {
   width: 100%;
   border-radius: 5px;
 }
@@ -39,4 +39,40 @@
   100% {
     scale: 1.2;
   }
+}
+
+.mediaSmallPlayer > div {
+  display: none;
+}
+
+.show {
+  display: block !important;
+}
+
+.show > * {
+  display: inline-block;
+}
+
+.show > div {
+  float: left;
+}
+
+.show > span {
+  float: right;
+  scale: 0.8;
+}
+
+.show > span.enable:hover {
+  scale: 1.1;
+  transition: 0.3s ease;
+}
+
+#info > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  display: inline;
+  width: calc(100% - 24px);
+  text-align: left;
 }

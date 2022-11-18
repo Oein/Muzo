@@ -60,20 +60,31 @@
           </label>
           <span class="tooltiptext">Playing media</span>
           <div class="mediaSmallPlayer close">
-            <div>
-              <div>Playing 333.mp4</div>
-              <span
+            <div id="info" class="show">
+              <div>Playing Nothing</div>
+              <span class="disable"
                 ><span class="material-symbols-outlined">
                   open_in_full
                 </span></span
               >
             </div>
-            <div id="video-container" class="hide">
-              <video src="/testVideo.mp4" controls autoplay></video>
+            <div id="video-container">
+              <video
+                id="video-player"
+                src="/testVideo.mp4"
+                controls
+                autoplay
+              ></video>
             </div>
-            <div id="audio-container" class="hide">
-              <audio src="/testAudio.mp3" controls autoplay></audio>
+            <div id="audio-container">
+              <audio
+                id="audio-player"
+                src="/testAudio.mp3"
+                controls
+                autoplay
+              ></audio>
             </div>
+            <div id="playNothing" class="show"></div>
           </div>
         </span>
       </div>
