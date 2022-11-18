@@ -2,6 +2,7 @@ import session from "./session.js";
 import { allowedPath } from "../../../types/allowedPath";
 import * as ABPath from "./pathGoBack.js";
 import { load, done } from "./loading.js";
+import { play as playMedia } from "./mediaPlayer.js";
 
 import {
   codeExts,
@@ -194,7 +195,6 @@ function classNamer() {
   file_selected.forEach((v, i) => {
     files.children[v - 1].className = "driveSelected";
     let ty = (files.children[v - 1] as HTMLDivElement).innerText.trim();
-    console.log(ty);
     if (ty.startsWith("link")) enable = false;
     if (ty.startsWith("question")) enable = false;
     (files.children[v - 1].children[0] as HTMLInputElement).checked = true;
@@ -290,8 +290,12 @@ function fileClickHnadler(
           if (d.name.startsWith(".") == false && dns.length < 2) return;
           if (d.name.startsWith(".") && dns.length < 3) return;
           let ext = dns[dns.length - 1].toLocaleLowerCase();
-          if (audioExts.includes(ext)) alert("Play audio");
-          if (videoExts.includes(ext)) alert("Play Movie");
+          if (audioExts.includes(ext)) {
+            playMedia(drives_paths[driveSelected], path, d.name);
+          }
+          if (videoExts.includes(ext)) {
+            playMedia(drives_paths[driveSelected], path, d.name);
+          }
           if (codeExts.includes(ext)) alert("Editor");
           if (imageExts.includes(ext)) {
             if (ext == "heic") {

@@ -6,6 +6,7 @@ const router = express.Router();
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import logger from "../logger/index.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,6 +36,7 @@ router.get("/*", (req, res) => {
     readFile(p_join(__dirname, "..", "public", fileN), (e, v) => {
       if (e) {
         res.status(404);
+        logger.error(`[404] ${req.path}`);
         res.redirect("/404");
         return;
       }
@@ -66,6 +68,7 @@ router.get("/*", (req, res) => {
     readFile(p_join(__dirname, "..", "public", fileN), (e, v) => {
       if (e) {
         res.status(404);
+        logger.error(`[404] ${req.path}`);
         res.redirect("/404");
         return;
       }

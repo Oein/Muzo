@@ -61,7 +61,7 @@
           <span class="tooltiptext">Playing media</span>
           <div class="mediaSmallPlayer close">
             <div id="info" class="show">
-              <div>Playing Nothing</div>
+              <div id="infoText">Playing Nothing</div>
               <span class="disable"
                 ><span class="material-symbols-outlined">
                   open_in_full
@@ -74,6 +74,7 @@
                 src="/testVideo.mp4"
                 controls
                 autoplay
+                volume="0.5"
               ></video>
             </div>
             <div id="audio-container">
@@ -82,6 +83,7 @@
                 src="/testAudio.mp3"
                 controls
                 autoplay
+                volume="0.5"
               ></audio>
             </div>
             <div id="playNothing" class="show"></div>
@@ -114,11 +116,6 @@
     <script
       type="module"
       src="/static/pages/main/mediaPlayerBTN.js"
-      defer
-    ></script>
-    <script
-      type="module"
-      src="/static/pages/main/mediaPlayer.js"
       defer
     ></script>
   </body>
