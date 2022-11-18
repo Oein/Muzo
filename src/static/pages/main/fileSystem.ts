@@ -3,6 +3,7 @@ import { allowedPath } from "../../../types/allowedPath";
 import * as ABPath from "./pathGoBack.js";
 import { load, done } from "./loading.js";
 import { play as playMedia } from "./mediaPlayer.js";
+import { open as openPlayer } from "./mediaPlayerBTN.js";
 
 import {
   codeExts,
@@ -292,9 +293,11 @@ function fileClickHnadler(
           let ext = dns[dns.length - 1].toLocaleLowerCase();
           if (audioExts.includes(ext)) {
             playMedia(drives_paths[driveSelected], path, d.name);
+            setTimeout(openPlayer, 5);
           }
           if (videoExts.includes(ext)) {
             playMedia(drives_paths[driveSelected], path, d.name);
+            setTimeout(openPlayer, 5);
           }
           if (codeExts.includes(ext)) alert("Editor");
           if (imageExts.includes(ext)) {

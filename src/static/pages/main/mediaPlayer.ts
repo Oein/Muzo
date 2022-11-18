@@ -44,6 +44,11 @@ videoPlayer.addEventListener("play", () => {
   classNamer();
 });
 
+export function focus() {
+  if (playing == PlayingType.Audio) audioPlayer.focus();
+  if (playing == PlayingType.Video) videoPlayer.focus();
+}
+
 function classNamer() {
   if (playing != PlayingType.NotPlaying && !paused)
     media.classList.add("playing");
@@ -90,7 +95,6 @@ export function play(drive: string, path: string, fileName: string) {
     (fileName.startsWith(".") && dns.length >= 3)
   ) {
     let ext = dns[dns.length - 1].toLocaleLowerCase();
-    console.log(ext);
     if (audioExts.includes(ext)) {
       playing = PlayingType.Audio;
       paused = false;
