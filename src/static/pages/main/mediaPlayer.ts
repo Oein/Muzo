@@ -192,7 +192,6 @@ function audioTime() {
 function initAudioPlayer() {
   window.jsmediatags.read(audioPlayer.src, {
     onSuccess: function (result) {
-      console.log(result);
       function picturing() {
         if (!result.tags.picture) return;
 
