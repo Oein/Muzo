@@ -8,6 +8,10 @@ body {
   background-color: #ffeff5;
 }
 
+#audio-player {
+  display: none;
+}
+
 #app-cover {
   position: absolute;
   top: 50%;
