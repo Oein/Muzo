@@ -242,10 +242,3 @@ export function play(drive: string, path: string, fileName: string) {
 }
 
 classNamer();
-setTimeout(() => {
-  play(
-    "/Users/dev",
-    "/Downloads/",
-    "18 MacCunn The Lay of the Last Minstrel - Part 2 Final chorus O Caledonia! stern and wild.mp3"
-  );
-}, 100);
