@@ -9,7 +9,6 @@ let videoContainer = document.getElementById(
 ) as HTMLDivElement;
 let audioPlayer = document.getElementById("audio-player") as HTMLAudioElement;
 let videoPlayer = document.getElementById("video-player") as HTMLVideoElement;
-let infoText = document.getElementById("infoText") as HTMLDivElement;
 let audioName = document.querySelector("#albumName") as HTMLDivElement;
 let trackName = document.querySelector("#trackName") as HTMLDivElement;
 let audioNameB = document.querySelector("#albumNameB") as HTMLDivElement;
@@ -239,15 +238,6 @@ function initAudioPlayer() {
   });
 }
 
-export function playingText(fileName: string) {
-  if (PlayingType.NotPlaying == playing) {
-    infoText.innerText = `Playing Nothing`;
-    return;
-  }
-
-  infoText.innerText = `Playing ${fileName}`;
-}
-
 export function play(drive: string, path: string, fileName: string) {
   let url = `/api/files/cat/?drive=${drive}&path=${
     path + fileName
@@ -275,8 +265,6 @@ export function play(drive: string, path: string, fileName: string) {
       playingFileName = fileName;
     }
   }
-
-  playingText(fileName);
   classNamer();
 }
 
