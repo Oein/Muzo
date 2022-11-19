@@ -189,6 +189,17 @@ function audioTime() {
 }
 
 function initAudioPlayer() {
+  let base64String = "/images/musicNote.jpg";
+  (document.querySelector("#album-art-img") as HTMLImageElement).src =
+    base64String;
+  (
+    document.querySelector("#bg-artwork") as HTMLDivElement
+  ).style.backgroundImage = `url(${base64String})`;
+  trackName.innerText = "Unknown track";
+  trackNameB.innerText = trackName.innerText;
+  audioName.innerText = playingFileName;
+  audioNameB.innerText = playingFileName;
+
   window.jsmediatags.read(audioPlayer.src, {
     onSuccess: function (result) {
       function picturing() {
@@ -222,18 +233,7 @@ function initAudioPlayer() {
       naming();
       tracking();
     },
-    onError: function (error) {
-      let base64String = "/images/musicNote.jpg";
-      (document.querySelector("#album-art-img") as HTMLImageElement).src =
-        base64String;
-      (
-        document.querySelector("#bg-artwork") as HTMLDivElement
-      ).style.backgroundImage = `url(${base64String})`;
-      trackName.innerText = "Unknown track";
-      trackNameB.innerText = trackName.innerText;
-      audioName.innerText = playingFileName;
-      audioNameB.innerText = playingFileName;
-    },
+    onError: function (error) {},
   });
 }
 
