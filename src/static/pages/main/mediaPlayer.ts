@@ -1,3 +1,5 @@
+import { audioExts, videoExts } from "./fileExts.js";
+
 let media = document.getElementById("media") as HTMLSpanElement;
 let audioContainer = document.getElementById(
   "audio-container"
@@ -8,7 +10,6 @@ let videoContainer = document.getElementById(
 let audioPlayer = document.getElementById("audio-player") as HTMLAudioElement;
 let videoPlayer = document.getElementById("video-player") as HTMLVideoElement;
 let infoText = document.getElementById("infoText") as HTMLDivElement;
-
 let audioName = document.querySelector("#albumName") as HTMLDivElement;
 let trackName = document.querySelector("#trackName") as HTMLDivElement;
 let audioNameB = document.querySelector("#albumNameB") as HTMLDivElement;
@@ -23,16 +24,13 @@ let secbefore = document.querySelector("#play-previous") as HTMLDivElement;
 let secafter = document.querySelector("#play-next") as HTMLDivElement;
 let timebar = document.querySelector("#seek-bar") as HTMLDivElement;
 
-import { audioExts, videoExts } from "./fileExts.js";
-
-let playingFileName = "";
-
 enum PlayingType {
   Audio,
   Video,
   NotPlaying,
 }
 
+let playingFileName = "";
 let playing: PlayingType = PlayingType.NotPlaying;
 let paused = true;
 
