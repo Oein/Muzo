@@ -82,10 +82,6 @@ function clickPP() {
   classNamer();
 }
 
-export function focus() {
-  if (playing == PlayingType.Video) videoPlayer.focus();
-}
-
 function classNamer() {
   if (playing != PlayingType.NotPlaying && !paused)
     media.classList.add("playing");
@@ -149,15 +145,6 @@ function audioTime() {
   }%`;
 }
 
-export function playingText(fileName: string) {
-  if (PlayingType.NotPlaying == playing) {
-    infoText.innerText = `Playing Nothing`;
-    return;
-  }
-
-  infoText.innerText = `Playing ${fileName}`;
-}
-
 function initAudioPlayer() {
   window.jsmediatags.read(audioPlayer.src, {
     onSuccess: function (result) {
@@ -209,6 +196,15 @@ function initAudioPlayer() {
   });
 }
 
+export function playingText(fileName: string) {
+  if (PlayingType.NotPlaying == playing) {
+    infoText.innerText = `Playing Nothing`;
+    return;
+  }
+
+  infoText.innerText = `Playing ${fileName}`;
+}
+
 export function play(drive: string, path: string, fileName: string) {
   let url = `/api/files/cat/?drive=${drive}&path=${
     path + fileName
@@ -239,6 +235,10 @@ export function play(drive: string, path: string, fileName: string) {
 
   playingText(fileName);
   classNamer();
+}
+
+export function focus() {
+  if (playing == PlayingType.Video) videoPlayer.focus();
 }
 
 classNamer();
