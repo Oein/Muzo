@@ -17,6 +17,11 @@ let playPause = document.querySelector("#play-pause-button") as HTMLDivElement;
 let playPauseICON = document.querySelector(
   "#play-pause-button > span"
 ) as HTMLSpanElement;
+let audioCurTime = document.querySelector("#current-time") as HTMLDivElement;
+let audioMaxTime = document.querySelector("#track-length") as HTMLDivElement;
+let secbefore = document.querySelector("#play-previous") as HTMLDivElement;
+let secafter = document.querySelector("#play-next") as HTMLDivElement;
+let timebar = document.querySelector("#seek-bar") as HTMLDivElement;
 
 import { audioExts, videoExts } from "./fileExts.js";
 
@@ -31,44 +36,51 @@ enum PlayingType {
 let playing: PlayingType = PlayingType.NotPlaying;
 let paused = true;
 
-audioPlayer.addEventListener("pause", () => {
+videoPlayer.addEventListener("pause", videoPause);
+videoPlayer.addEventListener("play", pauseFalse);
+videoPlayer.addEventListener("load", videoPlayer.play);
+audioPlayer.addEventListener("pause", audioPause);
+audioPlayer.addEventListener("play", pauseFalse);
+audioPlayer.addEventListener("load", audioPlayer.play);
+audioPlayer.addEventListener("durationchange", audioDuration);
+audioPlayer.addEventListener("timeupdate", audioTime);
+playPause.addEventListener("click", clickPP);
+secbefore.addEventListener("click", secb);
+secafter.addEventListener("click", seca);
+
+function secb() {
+  audioPlayer.currentTime -= 10;
+}
+
+function seca() {
+  audioPlayer.currentTime += 10;
+}
+
+function pauseFalse() {
+  paused = false;
+  classNamer();
+}
+
+function audioPause() {
   if (playing == PlayingType.Audio) {
     paused = true;
   }
   classNamer();
-});
+}
 
-videoPlayer.addEventListener("pause", () => {
+function videoPause() {
   if (playing == PlayingType.Video) {
     paused = true;
   }
   classNamer();
-});
+}
 
-audioPlayer.addEventListener("play", () => {
-  paused = false;
-  classNamer();
-});
-
-videoPlayer.addEventListener("play", () => {
-  paused = false;
-  classNamer();
-});
-
-audioPlayer.onload = () => {
-  audioPlayer.play();
-};
-
-playPause.addEventListener("click", () => {
+function clickPP() {
   paused = !paused;
   if (paused) audioPlayer.pause();
   else audioPlayer.play();
   classNamer();
-});
-
-videoPlayer.onload = () => {
-  videoPlayer.play();
-};
+}
 
 export function focus() {
   if (playing == PlayingType.Video) videoPlayer.focus();
@@ -96,6 +108,45 @@ function classNamer() {
   if (playing == PlayingType.Video) {
     videoContainer.className = "show";
   } else videoPlayer.pause();
+}
+
+function pad2(n: number) {
+  return (n < 10 ? "0" : "") + n;
+}
+
+function audioDuration() {
+  let fulls = Math.floor(audioPlayer.duration);
+  let sec = fulls % 60;
+  fulls -= sec;
+  let min = fulls / 60;
+  audioMaxTime.innerText = `${min}:${pad2(sec)}`;
+  if (min >= 60) {
+    let hour = 0;
+    let rmin = min % 60;
+    min -= rmin;
+    hour = min / 60;
+    min = rmin;
+    audioMaxTime.innerText = `${hour}:${pad2(min)}:${pad2(sec)}`;
+  }
+}
+
+function audioTime() {
+  let fulls = Math.floor(audioPlayer.currentTime);
+  let sec = fulls % 60;
+  fulls -= sec;
+  let min = fulls / 60;
+  audioCurTime.innerText = `${min}:${pad2(sec)}`;
+  if (min >= 60) {
+    let hour = 0;
+    let rmin = min % 60;
+    min -= rmin;
+    hour = min / 60;
+    min = rmin;
+    audioCurTime.innerText = `${hour}:${pad2(min)}:${pad2(sec)}`;
+  }
+  timebar.style.width = `${
+    (audioPlayer.currentTime / audioPlayer.duration) * 100
+  }%`;
 }
 
 export function playingText(fileName: string) {
