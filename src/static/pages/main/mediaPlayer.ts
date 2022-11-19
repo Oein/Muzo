@@ -23,6 +23,9 @@ let audioMaxTime = document.querySelector("#track-length") as HTMLDivElement;
 let secbefore = document.querySelector("#play-previous") as HTMLDivElement;
 let secafter = document.querySelector("#play-next") as HTMLDivElement;
 let timebar = document.querySelector("#seek-bar") as HTMLDivElement;
+let seekArea = document.querySelector("#s-area") as HTMLDivElement;
+let sHover = document.querySelector("#s-hover") as HTMLDivElement;
+let insTime = document.querySelector("#ins-time") as HTMLDivElement;
 
 enum PlayingType {
   Audio,
@@ -45,6 +48,49 @@ audioPlayer.addEventListener("timeupdate", audioTime);
 playPause.addEventListener("click", clickPP);
 secbefore.addEventListener("click", secb);
 secafter.addEventListener("click", seca);
+seekArea.addEventListener("mousemove", sareamove);
+seekArea.addEventListener("mouseleave", sareaout);
+seekArea.addEventListener("click", sareaclick);
+
+function sareaout() {
+  insTime.style.display = "none";
+  sHover.style.width = "0px";
+}
+
+function sareaclick(e: MouseEvent) {
+  let seekT = e.offsetX;
+  let seekLoc = audioPlayer.duration * (seekT / seekArea.clientWidth);
+  let fulls = Math.floor(seekLoc);
+  audioPlayer.currentTime = fulls;
+}
+
+function sareamove(e: MouseEvent) {
+  let seekT = e.offsetX;
+  let seekLoc = audioPlayer.duration * (seekT / seekArea.clientWidth);
+
+  sHover.style.width = `${seekT}px`;
+
+  let tx_ = "";
+
+  let fulls = Math.floor(seekLoc);
+  let sec = fulls % 60;
+  fulls -= sec;
+  let min = fulls / 60;
+  tx_ = `${min}:${pad2(sec)}`;
+  if (min >= 60) {
+    let hour = 0;
+    let rmin = min % 60;
+    min -= rmin;
+    hour = min / 60;
+    min = rmin;
+    tx_ = `${hour}:${pad2(min)}:${pad2(sec)}`;
+  }
+
+  insTime.innerText = tx_;
+  insTime.style.left = `${seekT}px`;
+  insTime.style.marginLeft = "-21px";
+  insTime.style.display = "block";
+}
 
 function secb() {
   audioPlayer.currentTime -= 10;
