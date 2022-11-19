@@ -62,6 +62,7 @@ router.get("/", async (req, res) => {
   }
 
   let joinedP = decodeURI(p_join(drive as string, path as string));
+  let jsp = joinedP.split("/");
 
   pathExists(joinedP).then((ex) => {
     if (!ex) {
@@ -72,7 +73,8 @@ router.get("/", async (req, res) => {
       );
       return;
     }
-    res.sendFile(joinedP);
+    let ext = jsp[jsp.length - 1];
+    res.download(joinedP, ext);
   });
 });
 
