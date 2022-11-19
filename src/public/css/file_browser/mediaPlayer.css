@@ -1,6 +1,12 @@
+@import url("./audioPlayer.css");
+
+.mediaSmallPlayer:has(#audio-container.show) {
+  background: none !important;
+  box-shadow: none !important;
+}
+
 .mediaSmallPlayer {
-  background-color: #e7e8e9;
-  border: 1px solid #a9a9a9;
+  background-color: #fff7f7;
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.3);
   color: black;
   text-align: center;
@@ -62,6 +68,12 @@
   scale: 0.8;
 }
 
+#info > span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 .show > span.enable:hover {
   scale: 1.1;
   transition: 0.3s ease;
@@ -73,6 +85,40 @@
   white-space: nowrap;
   word-break: break-all;
   display: inline;
-  width: calc(100% - 24px);
   text-align: left;
+}
+
+#cover {
+  width: 50%;
+  display: table-cell;
+}
+
+#coverimg {
+  width: 100%;
+  border-radius: 50%;
+  border: #a9a9a9 1px solid;
+  animation-name: rotate360;
+  animation-iteration-count: infinite;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+}
+
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#audio-conntroller {
+  width: 50%;
+  display: table-cell;
+  vertical-align: top;
+  padding: 5px;
+}
+
+#audio-title {
+  color: #54576f;
 }

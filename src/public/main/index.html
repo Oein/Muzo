@@ -60,21 +60,90 @@
           </label>
           <span class="tooltiptext">Playing media</span>
           <div class="mediaSmallPlayer close">
-            <div id="info" class="show">
-              <div id="infoText">Playing Nothing</div>
-              <span class="disable"
-                ><span class="material-symbols-outlined">
-                  open_in_full
-                </span></span
-              >
-            </div>
             <div id="video-container">
+              <div id="info" class="show">
+                <div class="marquee">
+                  <div><span id="infoText">Playing Nothing</span></div>
+                </div>
+                <span class="enable"
+                  ><span class="material-symbols-outlined">
+                    open_in_full
+                  </span></span
+                >
+              </div>
               <video id="video-player" controls autoplay volume="0.5"></video>
             </div>
             <div id="audio-container">
               <audio id="audio-player" controls autoplay volume="0.5"></audio>
+              <div>
+                <div id="app-cover">
+                  <div id="bg-artwork"></div>
+                  <div id="player">
+                    <div id="player-track" class="active">
+                      <div id="album-name" class="marquee">
+                        <div>
+                          <span id="albumName">Not Playing</span>
+                          <span
+                            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+                          >
+                          <span id="albumNameB">Not Playing</span>
+                        </div>
+                      </div>
+                      <div id="track-name" class="marquee">
+                        <div>
+                          <span id="trackName">Not Playing</span>
+                          <span
+                            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+                          >
+                          <span id="trackNameB">Not Playing</span>
+                        </div>
+                      </div>
+                      <div id="track-time">
+                        <div id="current-time"></div>
+                        <div id="track-length"></div>
+                      </div>
+                      <div id="s-area">
+                        <div id="ins-time"></div>
+                        <div id="s-hover"></div>
+                        <div id="seek-bar"></div>
+                      </div>
+                    </div>
+                    <div id="player-content">
+                      <div id="album-art">
+                        <img
+                          src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg"
+                          class="active"
+                          id="album-art-img"
+                        />
+                      </div>
+                      <div id="player-controls">
+                        <div class="control">
+                          <div class="button" id="play-previous">
+                            <span class="material-symbols-outlined">
+                              fast_rewind
+                            </span>
+                          </div>
+                        </div>
+                        <div class="control">
+                          <div class="button" id="play-pause-button">
+                            <span class="material-symbols-outlined">
+                              play_arrow
+                            </span>
+                          </div>
+                        </div>
+                        <div class="control">
+                          <div class="button" id="play-next">
+                            <span class="material-symbols-outlined">
+                              fast_forward
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div id="playNothing" class="show"></div>
           </div>
         </span>
       </div>
