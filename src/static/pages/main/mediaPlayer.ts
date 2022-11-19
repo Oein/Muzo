@@ -223,7 +223,6 @@ function initAudioPlayer() {
       tracking();
     },
     onError: function (error) {
-      console.log(error);
       let base64String = "/images/musicNote.jpg";
       (document.querySelector("#album-art-img") as HTMLImageElement).src =
         base64String;
