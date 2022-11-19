@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "rm -rd mini; nodemon --watch \"src/**\" --ext \"ts,json,mts,cts,html,css\" --ignore \"src/**/*.spec.ts\" --exec \"tsc;cp -rd src/static dist;cp -rd src/public dist;node --experimental-modules --es-module-specifier-resolution=node dist/index.js\"",
-    "build": "tsc;npx uglifyjs-folder dist --pattern \"**/*.js\" -eo mini -x .js;npx uglifyjs-folder dist --pattern \"**/*.mjs\" -eo mini -x .mjs;npx uglifyjs-folder dist --pattern \"**/*.cjs\" -eo mini -x .cjs;cp -rd src/static mini;cp -rd src/public mini;rm mini/**/*.*ts",
+    "dev": "rm -rd mini; nodemon --watch \"src/**\" --ext \"ts,json,mts,cts,html,css\" --ignore \"src/**/*.spec.ts\" --exec \"tsc;cp -r src/static dist;cp -r src/public dist;node --experimental-modules --es-module-specifier-resolution=node dist/index.js\"",
+    "build": "tsc;npx uglifyjs-folder dist --pattern \"**/*.js\" -eo mini -x .js;npx uglifyjs-folder dist --pattern \"**/*.mjs\" -eo mini -x .mjs;npx uglifyjs-folder dist --pattern \"**/*.cjs\" -eo mini -x .cjs;cp -r src/static mini;cp -r src/public mini;rm mini/**/*.*ts",
     "start": "node --experimental-modules --es-module-specifier-resolution=node mini/index.js"
   },
   "keywords": [],
-  "author": "@Oein",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/fs-extra": "^9.0.13",
