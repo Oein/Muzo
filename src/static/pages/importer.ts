@@ -48,3 +48,12 @@ scripts.forEach((v) => {
   }
   document.body.appendChild(sc);
 });
+
+(<any>window).notifier = new (<any>window).AWN({
+  icons: { enabled: false },
+  position: "bottom-right",
+  durations: {
+    global: 2000,
+  },
+  maxNotifications: 5,
+});
