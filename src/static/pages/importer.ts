@@ -28,6 +28,7 @@ let csses: string[] = [
   "/css/file_browser.css",
   "/css/googleIcon.css",
   "/css/zoombox.css",
+  "/css/awesomeNotifiy.css",
 ];
 
 csses.forEach((v) => {
