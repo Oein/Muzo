@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "rm -rd mini; nodemon --watch \"src/**\" --ext \"ts,json,mts,cts,html,css\" --ignore \"src/**/*.spec.ts\" --exec \"tsc;cp -r src/static dist;cp -r src/public dist;node --experimental-modules --es-module-specifier-resolution=node dist/index.js\"",
-    "build": "tsc;npx uglifyjs-folder dist --pattern \"**/*.js\" -eo mini -x .js;npx uglifyjs-folder dist --pattern \"**/*.mjs\" -eo mini -x .mjs;npx uglifyjs-folder dist --pattern \"**/*.cjs\" -eo mini -x .cjs;cp -r src/static mini;cp -r src/public mini;rm mini/**/*.*ts",
+    "dev": "del-cli -f mini && nodemon --watch \"src/**\" --ext \"ts,json,mts,cts,html,css\" --ignore \"src/**/*.spec.ts\" --exec \"tsc && cpr src/static dist && cpr src/public dist && node --experimental-modules --es-module-specifier-resolution=node dist/index.js\"",
+    "build": "tsc && npx uglifyjs-folder dist --pattern \"**/*.js\" -eo mini -x .js && npx uglifyjs-folder dist --pattern \"**/*.mjs\" -eo mini -x .mjs && npx uglifyjs-folder dist --pattern \"**/*.cjs\" -eo mini -x .cjs && cpr src/static mini && cpr src/public mini && rm mini/**/*.*ts",
     "start": "node --experimental-modules --es-module-specifier-resolution=node mini/index.js"
   },
   "keywords": [],
@@ -31,6 +31,8 @@
     "@types/jsmediatags": "^3.9.3",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
+    "cpr": "^3.0.1",
+    "del-cli": "^5.0.0",
     "nodemon": "^2.0.20",
     "uglifyjs-folder": "^3.1.4"
   },
