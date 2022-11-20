@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "del-cli -f mini && nodemon --watch \"src/**\" --ext \"ts,json,mts,cts,html,css\" --ignore \"src/**/*.spec.ts\" --exec \"tsc && cpr src/static dist -o && cpr src/public dist -o && node --experimental-modules --es-module-specifier-resolution=node dist/index.js\"",
+    "dev": "del-cli -f mini && nodemon --watch \"src/**\" --ext \"ts,json,mts,cts,html,css\" --ignore \"src/**/*.spec.ts\" --exec \"npm run devall\"",
+    "devall": "npm-run-all devst1 devst2 devst3 devst4",
+    "devst1": "tsc",
+    "devst2": "cpr src/static dist/static -o ",
+    "devst3": "cpr src/public dist/public -o",
+    "devst4": "node --experimental-modules --es-module-specifier-resolution=node dist/index.js",
     "build": "tsc && npx uglifyjs-folder dist --pattern \"**/*.js\" -eo mini -x .js && npx uglifyjs-folder dist --pattern \"**/*.mjs\" -eo mini -x .mjs && npx uglifyjs-folder dist --pattern \"**/*.cjs\" -eo mini -x .cjs && cpr src/static mini -o && cpr src/public mini -o && rm mini/**/*.*ts",
     "start": "node --experimental-modules --es-module-specifier-resolution=node mini/index.js"
   },
@@ -34,6 +39,7 @@
     "cpr": "^3.0.1",
     "del-cli": "^5.0.0",
     "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
     "uglifyjs-folder": "^3.1.4"
   },
   "type": "module"
