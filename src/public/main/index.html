@@ -137,16 +137,52 @@
             </div>
           </div>
         </span>
-        <span id="playlistadd" class="disable toolbtn"
-          ><span class="material-symbols-outlined"> playlist_add </span>
-          <span class="tooltiptext">Add audio files to a playlist</span>
-        </span>
       </div>
       <div id="imgs"></div>
     </div>
 
     <div style="display: none">
       <input id="mediaOpen" type="checkbox" />
+    </div>
+
+    <div id="rightclickmenu" style="display: none">
+      <div class="disable" id="playlistadd">
+        <span>
+          <span class="material-symbols-outlined"> playlist_add </span>
+        </span>
+        <div>Add to playlist</div>
+      </div>
+      <div class="rm_divider"></div>
+      <div class="disable">
+        <span>
+          <span class="material-symbols-outlined"> cut </span>
+        </span>
+        <div>Cut</div>
+      </div>
+      <div class="disable">
+        <span>
+          <span class="material-symbols-outlined"> content_copy </span>
+        </span>
+        <div>Copy</div>
+      </div>
+      <div class="disable">
+        <span>
+          <span class="material-symbols-outlined"> content_paste </span>
+        </span>
+        <div>Paste</div>
+      </div>
+      <div class="disable">
+        <span>
+          <span class="material-symbols-outlined"> file_copy </span>
+        </span>
+        <div>Duplicate</div>
+      </div>
+      <div id="selectall">
+        <span>
+          <span class="material-symbols-outlined"> select_all </span>
+        </span>
+        <div>Select All</div>
+      </div>
     </div>
 
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
@@ -168,6 +204,11 @@
     <script type="module" src="/static/pages/main/refresh.js" defer></script>
     <script
       type="module"
+      src="/static/pages/main/disallselector.js"
+      defer
+    ></script>
+    <script
+      type="module"
       src="/static/pages/main/keyListener.js"
       defer
     ></script>
@@ -181,5 +222,6 @@
       src="/static/pages/main/playlistBTN.js"
       defer
     ></script>
+    <script type="module" src="/static/pages/main/rclickmenu.js" defer></script>
   </body>
 </html>
