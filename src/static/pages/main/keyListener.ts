@@ -1,3 +1,4 @@
+import { selectALL } from "./fileSystem.js";
 import { os } from "./userAgent.js";
 
 export function withCOMMANDKey(e: KeyboardEvent) {
@@ -8,10 +9,9 @@ export function withCOMMANDKey(e: KeyboardEvent) {
 }
 
 window.addEventListener("keydown", (e) => {
-  console.log(e);
   if (e.code == "KeyA" && withCOMMANDKey(e)) {
     e.preventDefault();
-    console.log("SELECT ALL");
+    selectALL();
   }
   if (e.code == "KeyX" && withCOMMANDKey(e)) {
     e.preventDefault();

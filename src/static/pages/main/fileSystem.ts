@@ -375,3 +375,10 @@ export function sessionGenerateDone() {
       done();
     });
 }
+
+export function selectALL() {
+  for (let i = 1; i <= files.childElementCount; i++) {
+    file_selected.push(i);
+  }
+  classNamer();
+}
