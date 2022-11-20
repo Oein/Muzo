@@ -4,6 +4,7 @@ import * as ABPath from "./pathGoBack.js";
 import { load, done } from "./loading.js";
 import { play as playMedia } from "./mediaPlayer.js";
 import { open as openPlayer } from "./mediaPlayerBTN.js";
+import { os } from "./userAgent.js";
 
 import {
   codeExts,
@@ -19,19 +20,13 @@ let imgs = document.getElementById("imgs") as HTMLDivElement;
 
 session;
 
-let driveSelected = 0;
-let drives_paths: string[] = [];
-let path = "/";
-
-let file_selected: number[] = [];
+export let driveSelected = 0;
+export let drives_paths: string[] = [];
+export let path = "/";
+export let file_selected: number[] = [];
 let file_c = 0;
-
 let show_hidden_files = false;
-
 let last_file_click = new Date().getTime() - 100000;
-
-let os: string = "";
-let ua = navigator.userAgent as string;
 
 let tools_download = document.getElementById("download") as HTMLSpanElement;
 let tools_download_zip = document.getElementById(
@@ -53,78 +48,6 @@ removes.map((v) => {
 ((window as any).zoombox as any).option({
   enableZoomButton: true,
   hideWatermark: true,
-});
-
-(function () {
-  if (ua.match(/Win(dows )?NT 6\.0/)) {
-    os = "Windows Vista";
-  } else if (ua.match(/Win(dows )?(NT 5\.1|XP)/)) {
-    os = "Windows XP";
-  } else {
-    if (ua.indexOf("Windows NT 5.1") != -1 || ua.indexOf("Windows XP") != -1) {
-      os = "Windows XP";
-    } else if (
-      ua.indexOf("Windows NT 7.0") != -1 ||
-      ua.indexOf("Windows NT 6.1") != -1
-    ) {
-      os = "Windows 7";
-    } else if (
-      ua.indexOf("Windows NT 8.0") != -1 ||
-      ua.indexOf("Windows NT 6.2") != -1
-    ) {
-      os = "Windows 8";
-    } else if (
-      ua.indexOf("Windows NT 8.1") != -1 ||
-      ua.indexOf("Windows NT 6.3") != -1
-    ) {
-      os = "Windows 8.1";
-    } else if (
-      ua.indexOf("Windows NT 10.0") != -1 ||
-      ua.indexOf("Windows NT 6.4") != -1
-    ) {
-      os = "Windows 10";
-    } else if (
-      ua.indexOf("iPad") != -1 ||
-      ua.indexOf("iPhone") != -1 ||
-      ua.indexOf("iPod") != -1
-    ) {
-      os = "Apple iOS";
-    } else if (ua.indexOf("Android") != -1) {
-      os = "Android OS";
-    } else if (ua.match(/Win(dows )?NT( 4\.0)?/)) {
-      os = "Windows NT";
-    } else if (ua.match(/Mac|PPC/)) {
-      os = "Mac OS";
-    } else if (ua.match(/Linux/)) {
-      os = "Linux";
-    } else if (ua.match(/(Free|Net|Open)BSD/)) {
-      os = RegExp.$1 + "BSD";
-    } else if (ua.match(/SunOS/)) {
-      os = "Solaris";
-    }
-  }
-  if (os.indexOf("Windows") != -1) {
-    if (
-      navigator.userAgent.indexOf("WOW64") > -1 ||
-      navigator.userAgent.indexOf("Win64") > -1
-    ) {
-      os += " 64bit";
-    } else {
-      os += " 32bit";
-    }
-  }
-})();
-
-// blank click
-files.addEventListener("click", () => {
-  if (file_selected.length == 0 && file_c == 0) {
-    file_selected.map((v) => {
-      files.children[v].className = "";
-    });
-
-    file_selected = [];
-  }
-  file_c = 0;
 });
 
 tools_download.addEventListener("click", () => {
