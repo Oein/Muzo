@@ -35,6 +35,12 @@ enum PlayingType {
 let playingFileName = "";
 let playing: PlayingType = PlayingType.NotPlaying;
 let paused = true;
+let playingPlaylistIDX = -1;
+export let audioFilePlaylist: {
+  drive: string;
+  path: string;
+  filenames: string;
+}[] = [];
 
 videoPlayer.addEventListener("pause", videoPause);
 videoPlayer.addEventListener("play", pauseFalse);
@@ -256,6 +262,12 @@ export function play(drive: string, path: string, fileName: string) {
       playing = PlayingType.Audio;
       paused = false;
       playingFileName = fileName;
+      audioFilePlaylist.push({
+        drive: drive,
+        path: path,
+        filenames: fileName,
+      });
+      playingPlaylistIDX = audioFilePlaylist.length - 1;
       initAudioPlayer();
     }
     if (videoExts.includes(ext)) {
