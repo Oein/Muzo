@@ -10,6 +10,7 @@ let add = document.querySelector("#playlistadd") as HTMLSpanElement;
 let files___ = document.querySelector("#files") as HTMLDivElement;
 
 add.addEventListener("click", () => {
+  if (add.classList.contains("disable")) return;
   file_selected.forEach((v, i) => {
     let fn = (files___.children[v - 1] as HTMLDivElement).innerText;
     if (!fn.startsWith("music_note")) return;
@@ -35,3 +36,13 @@ add.addEventListener("click", () => {
       audioFilePlaylist.push(play);
   });
 });
+
+export function enablePlaylistAdd() {
+  add.classList.add("enable");
+  add.classList.remove("disable");
+}
+
+export function disablePlaylistAdd() {
+  add.classList.remove("enable");
+  add.classList.add("disable");
+}

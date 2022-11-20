@@ -13,6 +13,7 @@ import {
   videoExts,
   audioExts,
 } from "./fileExts.js";
+import { disablePlaylistAdd, enablePlaylistAdd } from "./playlistBTN.js";
 
 let drives = document.getElementById("drives") as HTMLDivElement;
 let files = document.getElementById("files") as HTMLDivElement;
@@ -24,7 +25,6 @@ export let driveSelected = 0;
 export let drives_paths: string[] = [];
 export let path = "/";
 export let file_selected: number[] = [];
-let file_c = 0;
 let show_hidden_files = false;
 let last_file_click = new Date().getTime() - 100000;
 
@@ -111,6 +111,7 @@ export function changePath(driveX: number, pathX: string) {
 function classNamer() {
   file_selected.sort();
   let enable = true;
+  let playlistAddEnable = false;
   if (file_selected[file_selected.length - 1] > files.childElementCount) return;
   for (let i = 0; i < files.childElementCount; i++) {
     files.children[i].className = "";
@@ -121,6 +122,7 @@ function classNamer() {
     let ty = (files.children[v - 1] as HTMLDivElement).innerText.trim();
     if (ty.startsWith("link")) enable = false;
     if (ty.startsWith("question")) enable = false;
+    if (ty.startsWith("music_note")) playlistAddEnable = true;
     (files.children[v - 1].children[0] as HTMLInputElement).checked = true;
   });
   if (file_selected.length >= 1 && enable) {
@@ -130,6 +132,9 @@ function classNamer() {
     tools_download.className = "disable toolbtn";
     tools_download_zip.className = "disable toolbtn";
   }
+
+  if (playlistAddEnable) enablePlaylistAdd();
+  else disablePlaylistAdd();
 }
 
 function download(url: string, name: string) {
@@ -186,7 +191,6 @@ function fileClickHnadler(
     classNamer();
   } else {
     // div
-    let target = e.target as HTMLDivElement;
     if (
       ((os.includes("Mac") || os.includes("Apple")) && e.metaKey) ||
       ((os.includes("Windows") || os.includes("Linux")) && e.ctrlKey)
