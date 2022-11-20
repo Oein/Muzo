@@ -1,4 +1,4 @@
-import { changePath } from "./fileSystem.js";
+import { changePath, disSelectAll } from "./fileSystem.js";
 
 interface ABPaths {
   drive: number;
@@ -71,6 +71,7 @@ back_btn.addEventListener("click", () => {
   if (!can_go_back()) return;
   let b = back();
   changePath(b.drive, b.path);
+  disSelectAll();
 });
 
 go_btn.addEventListener("click", () => {
@@ -97,4 +98,5 @@ go_btn.addEventListener("click", () => {
   }
 
   changePath(f.drive, f.path);
+  disSelectAll();
 });
