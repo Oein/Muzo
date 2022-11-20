@@ -382,3 +382,8 @@ export function selectALL() {
   }
   classNamer();
 }
+
+export function disSelectAll() {
+  file_selected = [];
+  classNamer();
+}
