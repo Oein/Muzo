@@ -25,7 +25,6 @@ let scripts: Script[] = [
 let csses: string[] = [
   "/css/index.css",
   "/css/global.css",
-  "/css/loading.css",
   "/css/file_browser.css",
   "/css/googleIcon.css",
   "/css/zoombox.css",

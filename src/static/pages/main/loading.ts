@@ -8,4 +8,4 @@ export function done() {
   loader.style.display = "none";
 }
 
-done();
+window.addEventListener("DOMContentLoaded", done);
