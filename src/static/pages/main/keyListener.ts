@@ -1,6 +1,6 @@
 import { os } from "./userAgent.js";
 
-function withCOMMANDKey(e: KeyboardEvent) {
+export function withCOMMANDKey(e: KeyboardEvent) {
   return (
     ((os.includes("Mac") || os.includes("Apple")) && e.metaKey) ||
     ((os.includes("Windows") || os.includes("Linux")) && e.ctrlKey)
