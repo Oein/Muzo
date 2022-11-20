@@ -205,6 +205,7 @@ function initAudioPlayer() {
   trackNameB.innerText = trackName.innerText;
   audioName.innerText = playingFileName;
   audioNameB.innerText = playingFileName;
+  audioPlayer.playbackRate = Number(localStorage["audioPlaybackRate"]);
 
   window.jsmediatags.read(audioPlayer.src, {
     onSuccess: function (result) {

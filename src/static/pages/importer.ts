@@ -11,6 +11,7 @@ class Script {
 let scripts: Script[] = [
   new Script("/static/pages/main/close.js"),
   new Script("/static/pages/main/divider.js"),
+  new Script("/static/pages/main/audioPlayerSpeed.js"),
   new Script("/static/pages/main/fullscreen.js"),
   new Script("/static/pages/main/fileSystem.js", 1),
   new Script("/static/pages/main/loading.js", 1),
