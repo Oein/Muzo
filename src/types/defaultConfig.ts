@@ -10,12 +10,7 @@ export default (): Config => {
       {
         name: "admin",
         permission: permission.Admin,
-        allowedPaths: [
-          {
-            pathD: "/",
-            permissions: [permission.Read, permission.Write],
-          },
-        ],
+        allowedPaths: [],
         authed: textToAuthKey("admin", global.salt),
       },
     ],

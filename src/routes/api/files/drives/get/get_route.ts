@@ -1,6 +1,9 @@
 import express from "express";
 import { init as init_db } from "../../../../../utils/database";
 import { databasion } from "../../../account/session/sessionroute";
+import nodeDiskInfo from "node-disk-info";
+import { permission } from "../../../../../types/permission";
+
 const router = express.Router();
 
 // middleware that is specific to this router
@@ -46,7 +49,19 @@ router.get("/", (req, res) => {
     }
 
     let uer = usr[0];
-    res.send(JSON.stringify(uer.allowedPaths));
+    if (uer.name == "admin") {
+      nodeDiskInfo.getDiskInfo().then((v) => {
+        uer.allowedPaths = [];
+        v.forEach((d, i) => {
+          console.log(d.mounted);
+          uer.allowedPaths.push({
+            pathD: d.mounted,
+            permissions: [permission.Write, permission.Read],
+          });
+        });
+        res.send(JSON.stringify(uer.allowedPaths));
+      });
+    } else res.send(JSON.stringify(uer.allowedPaths));
   })();
 });
 
