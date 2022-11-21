@@ -1,8 +1,6 @@
 import express from "express";
 import { init as init_db } from "../../../../../utils/database";
 import { databasion } from "../../../account/session/sessionroute";
-import nodeDiskInfo from "node-disk-info";
-import { permission } from "../../../../../types/permission";
 
 const router = express.Router();
 
@@ -49,18 +47,7 @@ router.get("/", (req, res) => {
     }
 
     let uer = usr[0];
-    if (uer.name == "admin") {
-      nodeDiskInfo.getDiskInfo().then((v) => {
-        uer.allowedPaths = [];
-        v.forEach((d, i) => {
-          uer.allowedPaths.push({
-            pathD: d.mounted,
-            permissions: [permission.Write, permission.Read],
-          });
-        });
-        res.send(JSON.stringify(uer.allowedPaths));
-      });
-    } else res.send(JSON.stringify(uer.allowedPaths));
+    res.send(JSON.stringify(uer.allowedPaths));
   })();
 });
 

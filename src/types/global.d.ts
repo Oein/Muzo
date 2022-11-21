@@ -7,4 +7,4 @@ declare global {
   var salt: string;
 }
 
-globalThis.config = defaultConfig;
+globalThis.config = await defaultConfig();

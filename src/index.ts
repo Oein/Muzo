@@ -84,7 +84,7 @@ async function ensureConfig() {
     logger.error("Could not find muzo configuration file");
     logger.info("Creating muzo configuration file...");
 
-    writeFileSync(configFile, ya_stringify(defaultConfig()));
+    writeFileSync(configFile, ya_stringify(await defaultConfig()));
 
     let db = get_db();
 
@@ -92,7 +92,7 @@ async function ensureConfig() {
   }
 
   global.config = {
-    ...defaultConfig,
+    ...(await defaultConfig()),
     ...ya_parse(readFileSync(configFile).toString()),
   };
 
