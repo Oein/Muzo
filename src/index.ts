@@ -100,11 +100,11 @@ async function ensureConfig() {
 }
 
 (async function () {
-  console.log("*     *  *    *  *****   ****");
-  console.log("**   **  *    *     *   *    *");
-  console.log("* * * *  *    *    *    *    *");
-  console.log("*  *  *  *    *   *     *    *");
-  console.log("*     *   ****   *****   ****");
+  console.log("M     M  U    U  ZZZZZ   OOOO ");
+  console.log("MM   MM  U    U     Z   OO  OO");
+  console.log("M M M M  U    U    Z    O    O");
+  console.log("M  M  M  UU  UU   Z     OO  OO");
+  console.log("M     M   UUUU   ZZZZZ   OOOO ");
   console.log("                      by Oein");
   logger.info("Starting muzo...");
 
