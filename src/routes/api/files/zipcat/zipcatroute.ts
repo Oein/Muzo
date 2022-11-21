@@ -16,9 +16,9 @@ router.use((req, res, next) => {
 });
 
 router.get("/", async (req, res) => {
-  let drive = req.query.drive || "";
-  let path = req.query.path || "";
-  let fileNames = ((req.query.file as string) || "").split("///");
+  let drive = decodeURI(req.query.drive?.toString() || "");
+  let path = decodeURI(req.query.path?.toString() || "");
+  let fileNames = decodeURI((req.query.file as string) || "").split("///");
 
   if (drive == undefined || path == undefined) {
     res.send(
