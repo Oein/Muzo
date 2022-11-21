@@ -12,7 +12,7 @@ router.use((req, res, next) => {
 let db = init_db();
 
 router.get("/", (req, res) => {
-  let auth = req.headers.authorization;
+  let auth = req.headers.authorization || "";
 
   (async function () {
     let has = await db.get(

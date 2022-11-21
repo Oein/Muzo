@@ -15,8 +15,8 @@ router.use((req, res, next) => {
 });
 
 router.get("/", async (req, res) => {
-  let drive = req.query.drive;
-  let path = req.query.path;
+  let drive = req.query.drive || "";
+  let path = req.query.path || "";
 
   if (drive == undefined || path == undefined) {
     res.send(
