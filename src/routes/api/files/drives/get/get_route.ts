@@ -53,7 +53,6 @@ router.get("/", (req, res) => {
       nodeDiskInfo.getDiskInfo().then((v) => {
         uer.allowedPaths = [];
         v.forEach((d, i) => {
-          console.log(d.mounted);
           uer.allowedPaths.push({
             pathD: d.mounted,
             permissions: [permission.Write, permission.Read],
