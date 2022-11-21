@@ -15,7 +15,6 @@ export default async (): Promise<Config> => {
   let v = await nodeDiskInfo.getDiskInfo();
   uer.allowedPaths = [];
   v.forEach((d, i) => {
-    console.log(d);
     if (
       d.blocks == 0 &&
       d.used == 0 &&
