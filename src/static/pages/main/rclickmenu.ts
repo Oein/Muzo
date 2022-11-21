@@ -1,5 +1,3 @@
-import { selectALL } from "./fileSystem.js";
-
 let rclickMenu = document.querySelector("#rightclickmenu") as HTMLDivElement;
 
 function normalizePozition(mouseX: number, mouseY: number) {
@@ -17,7 +15,7 @@ function normalizePozition(mouseX: number, mouseY: number) {
   return { normalizedX, normalizedY };
 }
 
-function closeRMenu() {
+export function closeRMenu() {
   rclickMenu.style.display = "none";
 }
 
@@ -33,10 +31,4 @@ document.body.addEventListener("contextmenu", (e) => {
 
 document.body.addEventListener("click", (e) => {
   if ((e.target as any).offestParent != rclickMenu) closeRMenu();
-});
-
-let rclickselectall = document.querySelector("#selectall") as HTMLDivElement;
-rclickselectall.addEventListener("click", () => {
-  selectALL();
-  closeRMenu();
 });
