@@ -5,6 +5,7 @@ import { load, done } from "./loading.js";
 import { play as playMedia } from "./mediaPlayer.js";
 import { open as openPlayer } from "./mediaPlayerBTN.js";
 import { os } from "./userAgent.js";
+import { classNamer as dupliNamer } from "./rmenu/duplicate.js";
 
 import {
   codeExts,
@@ -132,6 +133,8 @@ function classNamer() {
     tools_download.className = "disable toolbtn";
     tools_download_zip.className = "disable toolbtn";
   }
+
+  dupliNamer();
 
   if (playlistAddEnable) enablePlaylistAdd();
   else disablePlaylistAdd();
