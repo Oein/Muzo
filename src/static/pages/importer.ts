@@ -22,6 +22,8 @@ let scripts: Script[] = [
   new Script("/static/pages/main/mediaPlayerBTN.js", 1),
   new Script("/static/pages/main/playlistBTN.js", 1),
   new Script("/static/pages/main/rclickmenu.js", 1),
+  new Script("/static/pages/main/rmenu/duplicate.js", 1),
+  new Script("/static/pages/main/rmenu/select.js", 1),
 ];
 
 let csses: string[] = [
