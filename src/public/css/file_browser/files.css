@@ -37,9 +37,13 @@
   padding-bottom: 2px;
   cursor: pointer;
   border-radius: 5px;
-  overflow: hidden;
-  white-space: nowrap;
+  white-space: break-spaces;
   user-select: none;
+  word-break: break-all;
+}
+
+#files > div > div {
+  width: calc(100% - 21px - 10px - 1.25rem) !important;
 }
 
 #files > div {
