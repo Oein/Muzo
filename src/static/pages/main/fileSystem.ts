@@ -26,6 +26,7 @@ export let driveSelected = 0;
 export let drives_paths: string[] = [];
 export let path = "/";
 export let file_selected: number[] = [];
+export let file_names: string[] = [];
 let show_hidden_files = false;
 let last_file_click = new Date().getTime() - 100000;
 
@@ -275,6 +276,7 @@ export function lsAndShow() {
       },
     })
     .then((v) => {
+      file_names = v.data;
       v.data.forEach((d: { type: string; name: string }, i) => {
         if (d.name.startsWith(".") && !show_hidden_files) {
           return;
