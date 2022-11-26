@@ -8,20 +8,19 @@ import fs from "fs-extra";
 
 const router = express.Router();
 
+function replaceAll(str, searchStr, replaceStr) {
+  return str.split(searchStr).join(replaceStr);
+}
+
 // middleware that is specific to this router
 router.use((req, res, next) => {
   next();
 });
 
 router.get("/", async (req, res) => {
-  let drive = req.query.drive || "";
-  let path = req.query.path || "";
-  let overwrite = false;
-  let fileNames = ((req.query.file as string) || "").split("///");
-
-  if (req.query.overwrite == undefined) overwrite = false;
-  else if (req.query.overwrite == "f") overwrite = false;
-  else if (req.query.overwrite == "t") overwrite = true;
+  let drive = decodeURI(req.query.drive?.toString() || "");
+  let path = decodeURI(req.query.path?.toString() || "");
+  let fileNames = decodeURI((req.query.file as string) || "").split("///");
 
   if (drive == undefined || path == undefined) {
     res.send(
@@ -81,11 +80,6 @@ router.get("/", async (req, res) => {
   let joinedP = decodeURI(p_join(drive as string, path as string));
   if (joinedP.at(-1) == "/") joinedP = joinedP.slice(0, -1);
 
-  let exsistPathes: {
-    path: string;
-    filename: string;
-  }[] = [];
-
   fs.pathExists(joinedP).then((ex) => {
     if (!ex) {
       res.send(
@@ -102,35 +96,46 @@ router.get("/", async (req, res) => {
         res.end();
         return;
       }
+      let earlyFileN = p_join(joinedP, fileNames[parm]);
 
-      fs.pathExists(p_join(joinedP, fileNames[parm])).then((exsi) => {
+      fs.pathExists(earlyFileN).then((exsi) => {
         if (!exsi) {
           res.write(`${parm},`);
           threadFor(parm + 1);
           return;
         }
 
-        fs.pathExists(p_join(joinedP, "Duplicated " + fileNames[parm])).then(
-          (exsis) => {
-            if (exsis && !overwrite) {
-              exsistPathes.push({
-                path: joinedP,
-                filename: fileNames[parm],
-              });
-              res.write(`${parm}EX,`);
+        function tryDup(
+          ddCnt: number = 0,
+          prefix: string = "Duplication of ",
+          ddu: string = "D"
+        ) {
+          let newFileN = p_join(joinedP, prefix + fileNames[parm]);
+          if (prefix.length + fileNames[parm].length > 255) {
+            let fnn = fileNames[parm];
+            while (fnn.startsWith("Duplication of "))
+              fnn = fnn.replace("Duplication of ", "");
+            let newDD = "";
+            for (let i = 0; i <= ddCnt; i++) {
+              newDD += ddu;
             }
-            fs.copy(
-              p_join(joinedP, fileNames[parm]),
-              p_join(joinedP, "Duplicated " + fileNames[parm]),
-              {
-                overwrite: overwrite,
-              }
-            ).then(() => {
+            tryDup(ddCnt + 1, newDD);
+            return;
+          }
+          fs.pathExists(newFileN).then((exsis) => {
+            if (exsis) {
+              tryDup(ddCnt, prefix + "Duplication of ");
+              return;
+            }
+
+            fs.copy(earlyFileN, newFileN).then(() => {
               res.write(`${parm},`);
               threadFor(parm + 1);
             });
-          }
-        );
+          });
+        }
+
+        tryDup();
       });
     }
 
